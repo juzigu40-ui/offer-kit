@@ -1,6 +1,6 @@
 # 公开反馈记录
 
-更新时间：2026-05-21 22:47 CST
+更新时间：2026-05-21 23:13 CST
 
 用途：记录主动发出的公开触点。只记录明确求反馈、相关 issue 或自己 PR 下的回复；不记录群发、私信或硬广。
 
@@ -13,6 +13,7 @@
 | 2026-05-21 22:31 CST | agentic-swmm-workflow #2 | 回复 README 清晰度反馈 | issue 明确询问 README 是否讲清“不是 SWMM 替代品，而是工作流层” | https://github.com/Zhonghao1995/agentic-swmm-workflow/issues/2#issuecomment-4509275266 | 监控作者回复；如需要可给 README PR |
 | 2026-05-21 22:47 CST | BasedHardware/Omi #3120 | 提交 Open-Meteo integration PR 后回链 | issue 明确讨论 $50 integration-app bounty，PR 已实现无 OAuth 天气/空气质量 app | https://github.com/BasedHardware/omi/issues/3120#issuecomment-4509417467 | 监控 PR #7442 review；不重复催促 |
 | 2026-05-21 22:54 CST | BasedHardware/Omi PR #7442 | 回复自动 review 处理结果 | 自动评论指出验证约束和 HTTP client 复用问题，已用新 commit 修掉 | https://github.com/BasedHardware/omi/pull/7442#issuecomment-4509483730 | 等维护者 review |
+| 2026-05-21 23:13 CST | BasedHardware/Omi #3120 | 提交 Frankfurter currency integration PR 后回链 | 同一 issue 明确讨论 $50 integration-app bounty，PR 已实现无 OAuth 汇率转换 app | https://github.com/BasedHardware/omi/issues/3120#issuecomment-4509647063 | 监控 PR #7443 review；不重复催促 |
 
 ## 发送规则
 
