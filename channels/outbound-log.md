@@ -20,6 +20,8 @@
 | 2026-05-22 00:29 CST | BasedHardware/Omi PR #7445 | 回复第二条自动 review 处理结果 | 自动评论指出长周末 bridge day 文案和类型保护问题，已用新 commit 修掉 | https://github.com/BasedHardware/omi/pull/7445#issuecomment-4510363471 | 等维护者 review |
 | 2026-05-22 01:14 CST | Scottcjn/Rustchain PR #6064 | 回复 PR bot label 提示 | bot 提示非 docs PR 需要 BCOS label；无权限加 label，已说明改动范围并建议 BCOS-L1 | https://github.com/Scottcjn/Rustchain/pull/6064#issuecomment-4510739592 | 等维护者 review |
 | 2026-05-22 01:54 CST | BasedHardware/Omi #3120 | 提交 Open Food Facts integration PR 后回链 | 同一 issue 明确讨论 $50 integration-app bounty，PR 已实现无 OAuth 食品搜索、条码查询、产品对比和过敏原检查 app | https://github.com/BasedHardware/omi/issues/3120#issuecomment-4511039479 | 监控 PR #7448 review；不重复催促 |
+| 2026-05-22 02:02 CST | BasedHardware/Omi PR #7448 | 回复自动 review 处理结果 | 自动评论指出 malformed JSON 会 500、过敏原文本匹配会误判；已用新 commit 修掉 | https://github.com/BasedHardware/omi/pull/7448#issuecomment-4511123218 | 等维护者 review |
+| 2026-05-22 02:08 CST | BasedHardware/Omi PR #7448 | 回复 Codex review 处理结果 | 自动评论指出 async endpoint 里同步 requests 会阻塞 event loop；已改为 Starlette threadpool 包装 | https://github.com/BasedHardware/omi/pull/7448#issuecomment-4511164704 | 等维护者 review |
 
 ## 发送规则
 
