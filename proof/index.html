@@ -188,7 +188,7 @@
         </div>
         <aside class="summary">
           <span>已公开投出</span>
-          <strong>10 个 PR</strong>
+          <strong>11 个 PR</strong>
           <p>另有去 AI 味、PR 文案、安全报告等工具和服务页。</p>
         </aside>
       </section>
@@ -216,6 +216,17 @@
               <li>状态：OPEN，等待 review。</li>
             </ul>
             <p><a href="https://github.com/orchestration-agent/AgentOrchestration/pull/1064">查看 PR #1064</a></p>
+          </article>
+
+          <article class="card">
+            <span class="tag">GitHub bounty</span>
+            <h3>Expose active timer count</h3>
+            <p class="muted">metrics snapshot 返回 `active_timers` 数量，不暴露 timer 名称；`stop_timer()` 不再重入同一把锁。</p>
+            <ul>
+              <li>验证：`uv run pytest tests/test_metrics.py -q` -> 5 passed；`uv run pytest -q` -> 23 passed。</li>
+              <li>状态：OPEN，MERGEABLE，等待 review；bounty 以维护者判断为准。</li>
+            </ul>
+            <p><a href="https://github.com/orchestration-agent/AgentOrchestration/pull/1737">查看 PR #1737</a></p>
           </article>
 
           <article class="card">
