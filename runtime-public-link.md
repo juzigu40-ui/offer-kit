@@ -4,11 +4,16 @@
 
 https://juzigu40-ui.github.io/offer-kit/
 
+仓库：
+
+https://github.com/juzigu40-ui/offer-kit
+
 说明：
 
 - 这是 GitHub Pages 静态站，用于公开展示销售页、工具、服务菜单和渠道材料。
 - 静态站只展示付款入口，不处理真实付款交易。
-- 后续更新需要提交到 `juzigu40-ui/offer-kit` 仓库。
+- 首次构建已完成，GitHub Pages 状态为 `built`。
+- 发布副本移除了本地执行日志、SSH key 文件名和内部运行痕迹，只保留公开可看的材料。
 
 ## 临时公开链接
 
@@ -16,7 +21,7 @@ https://juzigu40-ui.github.io/offer-kit/
 
 https://dull-pillows-guess.loca.lt/
 
-说明：
+临时链接说明：
 
 - 这是本机 `offer-kit` 目录通过临时隧道暴露的预览链接。
 - 只有本地静态服务和隧道进程保持运行时有效。
@@ -27,4 +32,4 @@ https://dull-pillows-guess.loca.lt/
 
 我整理了一套 300 元 / 50 美金的 AI 小单成交资料包，包含报价页、获客私信、客户问卷、交付 SOP、异议处理和复购话术。页面在这里：
 
-https://dull-pillows-guess.loca.lt/
+https://juzigu40-ui.github.io/offer-kit/

@@ -69,6 +69,7 @@ Validation is listed in the PR body. I did not include wallet or payout details 
 
 ## 可放链接
 
+- 长期销售页：`https://juzigu40-ui.github.io/offer-kit/`
 - 公开交付页：`offer-kit/proof/index.html`
 - 简介入口页：`offer-kit/link-in-bio/index.html`
 - 去 AI 味服务：`offer-kit/services/no-ai-copy-polish.html`
@@ -79,5 +80,6 @@ Validation is listed in the PR body. I did not include wallet or payout details 
 ## 账号 / 权限边界
 
 - GitHub profile 已用当前登录账号更新；后续如需再改，先读远端 README，避免覆盖手工内容。
+- 长期销售页已发布到 GitHub Pages；后续更新需 push 到 `juzigu40-ui/offer-kit`。
 - 其他平台需要用户本人登录对应平台发布。
 - 不群发私信，不刷评论，不冒充客户评价。

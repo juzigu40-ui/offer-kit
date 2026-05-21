@@ -1,6 +1,6 @@
 # 渠道投放清单
 
-更新时间：2026-05-21 21:21 CST
+更新时间：2026-05-21 21:55 CST
 
 用途：把现有入口按平台拆开，避免“一个链接到处贴”。只做可复制清单，不自动发布、不自动登录账号。
 
@@ -9,6 +9,7 @@
 | 优先级 | 渠道 | 发什么 | 用哪个入口 | 为什么 | 需要账号 / 权限 |
 | --- | --- | --- | --- | --- | --- |
 | P0 | GitHub Profile README | 公开交付 + 服务边界 | `https://github.com/juzigu40-ui` | 看 PR 的维护者可能会点 profile，不能只看到空主页 | 已用当前 GitHub 账号更新 |
+| P0 | GitHub Pages 静态站 | 长期销售页 + 工具入口 | `https://juzigu40-ui.github.io/offer-kit/` | 临时隧道不稳定，公开链接要能长期打开 | 已发布；后续更新需 push |
 | P0 | GitHub PR / issue 回复 | 只在相关 review 或问题下写事实回复 | `tools/pr-note-builder/` | 已有 4 个 PR，review 来了要快速回复 | 只能在自己的 PR 或相关 issue 下回复 |
 | P0 | 即刻 / X / LinkedIn | 1 条“PR 文案怎么写”经验帖 | `channels/developer-short-posts.md` | 开发者更容易接受工具入口，不像硬广 | 需要账号本人发布 |
 | P1 | GitHub Discussion / Indie Hackers | README 3 点诊断 | `tools/readme-audit-builder/` | 开发者公开求反馈时，README 诊断比服务广告更自然 | 只回复明确求反馈的帖子 |
@@ -95,6 +96,7 @@ PR 和漏洞报告怎么写得不像 AI
 ## 下一步
 
 - GitHub Profile README 已完成；下一步优先从 `channels/developer-short-posts.md` 选 1 条开发者平台短帖。
+- 外部链接优先使用 `https://juzigu40-ui.github.io/offer-kit/`，不再依赖临时隧道。
 - 如果 24 小时内没有反馈，换安全报告短帖，不重复刷同一句。
 - 所有外部回复都先回答问题，再放工具或菜单链接。
 - 对方问价或准备付款时，先用 `services/scope-confirmation.html` 发范围确认，不直接催付款。
