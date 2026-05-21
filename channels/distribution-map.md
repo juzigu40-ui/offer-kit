@@ -1,6 +1,6 @@
 # 渠道投放清单
 
-更新时间：2026-05-21 22:24 CST
+更新时间：2026-05-21 22:31 CST
 
 用途：把现有入口按平台拆开，避免“一个链接到处贴”。只做可复制清单，不自动发布、不自动登录账号。
 
@@ -93,6 +93,8 @@ PR 和漏洞报告怎么写得不像 AI
   https://github.com/safal207/ProofPath/issues/14#issuecomment-4509187006
 - Elastic docs-content #6589：integration-skills README 反馈，未贴服务链接。
   https://github.com/elastic/docs-content/issues/6589#issuecomment-4509219974
+- agentic-swmm-workflow #2：README 清晰度反馈，未贴服务链接。
+  https://github.com/Zhonghao1995/agentic-swmm-workflow/issues/2#issuecomment-4509275266
 
 ## 不发的地方
 
