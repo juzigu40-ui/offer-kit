@@ -1,6 +1,6 @@
 # 渠道投放清单
 
-更新时间：2026-05-21 21:55 CST
+更新时间：2026-05-21 22:24 CST
 
 用途：把现有入口按平台拆开，避免“一个链接到处贴”。只做可复制清单，不自动发布、不自动登录账号。
 
@@ -11,6 +11,7 @@
 | P0 | GitHub Profile README | 公开交付 + 服务边界 | `https://github.com/juzigu40-ui` | 看 PR 的维护者可能会点 profile，不能只看到空主页 | 已用当前 GitHub 账号更新 |
 | P0 | GitHub Pages 静态站 | 长期销售页 + 工具入口 | `https://juzigu40-ui.github.io/offer-kit/` | 临时隧道不稳定，公开链接要能长期打开 | 已发布；后续更新需 push |
 | P0 | GitHub PR / issue 回复 | 只在相关 review 或问题下写事实回复 | `tools/pr-note-builder/` | 已有 4 个 PR，review 来了要快速回复 | 只能在自己的 PR 或相关 issue 下回复 |
+| P0 | 公开求反馈 issue | 对 README、launch、docs 写具体反馈 | `channels/outbound-log.md` | 比陌生私信更自然，且能留下公开贡献痕迹 | 只回明确求反馈或高度相关的问题 |
 | P0 | 即刻 / X / LinkedIn | 1 条“PR 文案怎么写”经验帖 | `channels/developer-short-posts.md` | 开发者更容易接受工具入口，不像硬广 | 需要账号本人发布 |
 | P1 | GitHub Discussion / Indie Hackers | README 3 点诊断 | `tools/readme-audit-builder/` | 开发者公开求反馈时，README 诊断比服务广告更自然 | 只回复明确求反馈的帖子 |
 | P1 | 小红书 / 朋友圈 | 小单服务菜单截图 + 具体边界 | `services/menu.html` | 面向 300 元中文轻服务，价格和交付清楚 | 需要账号本人发布 |
@@ -86,6 +87,13 @@ PR 和漏洞报告怎么写得不像 AI
 配图可以用：`offer-kit/channels/social-card.html`  
 可直接发图：`offer-kit/channels/social-card.png`
 
+## 已主动发出的公开回复
+
+- ProofPath #14：README / philosophy / launch-post 反馈，未贴服务链接。
+  https://github.com/safal207/ProofPath/issues/14#issuecomment-4509187006
+- Elastic docs-content #6589：integration-skills README 反馈，未贴服务链接。
+  https://github.com/elastic/docs-content/issues/6589#issuecomment-4509219974
+
 ## 不发的地方
 
 - 明确禁止自推广的社区。
@@ -98,6 +106,7 @@ PR 和漏洞报告怎么写得不像 AI
 - GitHub Profile README 已完成；下一步优先从 `channels/developer-short-posts.md` 选 1 条开发者平台短帖。
 - 外部链接优先使用 `https://juzigu40-ui.github.io/offer-kit/`，不再依赖临时隧道。
 - 如果 24 小时内没有反馈，换安全报告短帖，不重复刷同一句。
+- 继续找明确求反馈的开源 issue，每次只写真实读后的意见，不复制同一段。
 - 所有外部回复都先回答问题，再放工具或菜单链接。
 - 对方问价或准备付款时，先用 `services/scope-confirmation.html` 发范围确认，不直接催付款。
 - 评论区临时写回复时，先用 `tools/quick-audit-builder/` 生成 3 行诊断。
