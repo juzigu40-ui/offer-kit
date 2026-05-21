@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>去 AI 味改写样例库 | 300 元 / 50 美金</title>
+    <meta
+      name="description"
+      content="GitHub PR、漏洞报告、私信、商品页、社媒正文的去 AI 味改写样例。只展示表达方式，不编造成交或平台背书。"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html">AI 小单成交包</a>
+      <nav class="nav" aria-label="页面导航">
+        <a href="./no-ai-copy-polish.html">服务页</a>
+        <a href="./intake.html">下单单</a>
+        <a href="../tools/no-ai-checker/">自检器</a>
+        <a href="../seeds/">撒种</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero hero--compact">
+        <div class="hero__content">
+          <p class="eyebrow">不是案例背书，只是改写样例</p>
+          <h1>看改前改后，比看服务说明更快</h1>
+          <p class="lead">
+            这些样例覆盖 PR、漏洞报告、私信、商品页和社媒正文。目标是删掉模板味，留下事实、限制和下一步。
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="./intake.html">生成下单材料</a>
+            <a class="button button--secondary" href="./no-ai-copy-polish.html">回到服务页</a>
+          </div>
+        </div>
+        <aside class="price-panel" aria-label="价格信息">
+          <span class="price-panel__label">轻服务</span>
+          <strong>¥300 / $50</strong>
+          <p>3 段以内，24 小时内交付。只改表达，不替你造事实。</p>
+        </aside>
+      </section>
+
+      <section class="section">
+        <div class="section__intro">
+          <p class="eyebrow">改写样例</p>
+          <h2>每条都保留边界</h2>
+        </div>
+
+        <div class="sample-grid">
+          <article class="sample-card">
+            <span class="sample-card__tag">GitHub PR</span>
+            <h3>PR 描述</h3>
+            <div class="sample-pair">
+              <section>
+                <h4>改前</h4>
+                <p>
+                  This PR delivers a production-grade fix with comprehensive validation and seamless integration for the whole repository.
+                </p>
+              </section>
+              <section>
+                <h4>改后</h4>
+                <p>
+                  The failure is in `on_event()`: blank event names are accepted and written into handler metadata. This patch rejects non-string, empty, and whitespace-only names before metadata is created.
+                </p>
+              </section>
+            </div>
+            <p class="sample-note">删掉“production-grade”，改成具体失败点、改动位置和边界。</p>
+          </article>
+
+          <article class="sample-card">
+            <span class="sample-card__tag">漏洞报告</span>
+            <h3>安全影响</h3>
+            <div class="sample-pair">
+              <section>
+                <h4>改前</h4>
+                <p>
+                  This critical vulnerability can fully compromise the platform and cause severe business damage.
+                </p>
+              </section>
+              <section>
+                <h4>改后</h4>
+                <p>
+                  A webhook URL can point to loopback or private hosts. If the server sends the request from its own network, this may expose internal-only endpoints. I did not test against production systems.
+                </p>
+              </section>
+            </div>
+            <p class="sample-note">把夸张影响改成攻击条件、可能影响和未做事项。</p>
+          </article>
+
+          <article class="sample-card">
+            <span class="sample-card__tag">冷启动私信</span>
+            <h3>服务私信</h3>
+            <div class="sample-pair">
+              <section>
+                <h4>改前</h4>
+                <p>
+                  我可以帮你全面提升品牌表达和转化效率，如果感兴趣我们可以深入聊聊。
+                </p>
+              </section>
+              <section>
+                <h4>改后</h4>
+                <p>
+                  我看了你的服务页，第一屏写了很多优势，但没有说清楚交付物和价格。我可以先改第一屏和下单说明，范围控制在一页内。
+                </p>
+              </section>
+            </div>
+            <p class="sample-note">不要先讲能力，先指出一个具体页面问题。</p>
+          </article>
+
+          <article class="sample-card">
+            <span class="sample-card__tag">商品页</span>
+            <h3>数字产品说明</h3>
+            <div class="sample-pair">
+              <section>
+                <h4>改前</h4>
+                <p>
+                  这套资料能帮助你快速破局，实现从 0 到 1 的成交增长。
+                </p>
+              </section>
+              <section>
+                <h4>改后</h4>
+                <p>
+                  这是一份 Markdown 资料包，包含报价页、私信、客户问卷、交付 SOP 和复购跟进。适合已经会做一项服务，但还没整理成可报价小单的人。
+                </p>
+              </section>
+            </div>
+            <p class="sample-note">把结果承诺换成交付清单和适用人群。</p>
+          </article>
+
+          <article class="sample-card">
+            <span class="sample-card__tag">社媒正文</span>
+            <h3>轻服务发布</h3>
+            <div class="sample-pair">
+              <section>
+                <h4>改前</h4>
+                <p>
+                  我推出了一个高价值文案服务，能让你的表达更有温度、更有转化。
+                </p>
+              </section>
+              <section>
+                <h4>改后</h4>
+                <p>
+                  我做一个小服务：你发一段 AI 味重的文案，我改一版，顺手写几条删改原因。适合 PR、漏洞报告、商品页和私信。¥300 / $50。
+                </p>
+              </section>
+            </div>
+            <p class="sample-note">直接说谁发什么、我交付什么、多少钱。</p>
+          </article>
+
+          <article class="sample-card">
+            <span class="sample-card__tag">邮件</span>
+            <h3>回复维护者</h3>
+            <div class="sample-pair">
+              <section>
+                <h4>改前</h4>
+                <p>
+                  Thank you for your valuable feedback. I have carefully addressed all concerns and improved the implementation.
+                </p>
+              </section>
+              <section>
+                <h4>改后</h4>
+                <p>
+                  I updated the host guard to catch hex-tail IPv4-mapped IPv6 addresses such as `::ffff:7f00:1`. I also added tests for loopback, private, and public mapped addresses.
+                </p>
+              </section>
+            </div>
+            <p class="sample-note">回复 review 时写“改了什么 + 怎么验证”，不要写感谢套话占篇幅。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--split">
+        <div>
+          <p class="eyebrow">边界</p>
+          <h2>这些样例不是成交截图</h2>
+          <p class="section__copy">
+            页面只展示表达方式，不代表客户评价、平台奖励或成交结果。真实下单前仍要先确认原文、发布位置和不可改动事实。
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="./intake.html">生成下单材料</a>
+            <a class="button button--secondary" href="../channels/posting-queue.md">查看发布队列</a>
+          </div>
+        </div>
+        <div class="wallet">
+          <span>不做</span>
+          <p>不编造经历、收益、客户、漏洞影响、测试结果或平台背书。</p>
+          <span>只做</span>
+          <p>改表达、改顺序、删套话、补清楚边界。</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>样例库不写收益承诺、平台通过承诺或账号代运营。</p>
+    </footer>
+  </body>
+</html>

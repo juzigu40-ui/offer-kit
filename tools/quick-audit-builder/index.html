@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3 行诊断生成器</title>
+    <style>
+      :root {
+        --ink: #17202a;
+        --muted: #5d6876;
+        --line: #d8dee7;
+        --paper: #f6f8fb;
+        --surface: #ffffff;
+        --green: #087f5b;
+        --blue: #1d4ed8;
+        --orange: #b45309;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      main {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 34px 0 58px;
+      }
+
+      .top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 20px;
+        align-items: end;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      h1,
+      h2,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 8px;
+        font-size: clamp(34px, 6vw, 62px);
+        line-height: 1.06;
+        letter-spacing: 0;
+      }
+
+      .sub {
+        max-width: 760px;
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 10px 14px;
+        color: var(--ink);
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .button--primary {
+        border-color: var(--green);
+        background: var(--green);
+        color: #ffffff;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 18px;
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        color: var(--ink);
+        font: inherit;
+      }
+
+      input,
+      select {
+        min-height: 42px;
+        padding: 0 12px;
+      }
+
+      textarea {
+        min-height: 86px;
+        resize: vertical;
+        padding: 12px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .output {
+        min-height: 340px;
+        white-space: pre-wrap;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fbfcfd;
+        padding: 14px;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 14px;
+      }
+
+      .small {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .checks {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .check {
+        border-left: 4px solid var(--green);
+        border-radius: 8px;
+        background: #f4fbf7;
+        padding: 10px 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .check--warn {
+        border-left-color: var(--orange);
+        background: #fff8ed;
+      }
+
+      @media (max-width: 860px) {
+        .top,
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="top">
+        <div>
+          <h1>3 行诊断生成器</h1>
+          <p class="sub">
+            用于评论区、社群和私域。先给对方一个具体问题、一个改法、一个边界，不上来就推服务。
+          </p>
+        </div>
+        <a class="button" href="../../seeds/">返回撒种板</a>
+      </section>
+
+      <section class="layout">
+        <form class="panel">
+          <div class="field">
+            <label for="target">对象</label>
+            <input id="target" value="你的服务页第一屏" />
+          </div>
+
+          <div class="field">
+            <label for="channel">发布位置</label>
+            <select id="channel">
+              <option>评论区</option>
+              <option>社群回复</option>
+              <option>私信</option>
+              <option>GitHub Discussion</option>
+              <option>X / LinkedIn 回复</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="problem">看到的问题</label>
+            <textarea id="problem">第一屏说了很多优势，但没说清楚付款后具体拿到什么。</textarea>
+          </div>
+
+          <div class="field">
+            <label for="fix">建议怎么改</label>
+            <textarea id="fix">把标题下面第一句话改成：交付物、交付时间、需要客户提供的材料。</textarea>
+          </div>
+
+          <div class="field">
+            <label for="boundary">边界</label>
+            <textarea id="boundary">不要写“提升转化”这种结果承诺，先把交付范围写清楚。</textarea>
+          </div>
+
+          <div class="field">
+            <label for="link">可选入口</label>
+            <input id="link" value="offer-kit/services/menu.html" />
+          </div>
+
+          <div class="actions">
+            <button class="button button--primary" type="button" id="build">生成</button>
+            <button class="button" type="button" id="copy">复制</button>
+            <a class="button" href="../../channels/helpful-replies.md">看回复库</a>
+          </div>
+        </form>
+
+        <aside class="panel">
+          <h2>回复草稿</h2>
+          <div class="output" id="output"></div>
+          <p class="small" id="copyState">复制前确认对方确实在问相关问题。</p>
+          <div class="checks" id="checks"></div>
+        </aside>
+      </section>
+    </main>
+
+    <script>
+      const fields = {
+        target: document.querySelector("#target"),
+        channel: document.querySelector("#channel"),
+        problem: document.querySelector("#problem"),
+        fix: document.querySelector("#fix"),
+        boundary: document.querySelector("#boundary"),
+        link: document.querySelector("#link"),
+      };
+      const output = document.querySelector("#output");
+      const checks = document.querySelector("#checks");
+      const copyState = document.querySelector("#copyState");
+
+      function clean(text) {
+        return text
+          .replace(/全面提升|快速破局|高转化|闭环|赋能|颠覆/g, "")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      function buildReply() {
+        const target = clean(fields.target.value) || "这段文案";
+        const problem = clean(fields.problem.value) || "问题需要再具体一点。";
+        const fix = clean(fields.fix.value) || "先写清交付物、验证或边界。";
+        const boundary = clean(fields.boundary.value) || "不要把没有验证的结果写成承诺。";
+        const link = clean(fields.link.value);
+
+        const lines = [
+          `我会先改 ${target} 的这 3 点：`,
+          "",
+          `1. 问题：${problem}`,
+          `2. 改法：${fix}`,
+          `3. 边界：${boundary}`,
+        ];
+
+        if (link) {
+          lines.push("", `如果你想按这个结构自己改，可以看这个入口：${link}`);
+        }
+
+        return lines.join("\n");
+      }
+
+      function renderChecks(text) {
+        const hasProblem = text.includes("问题：");
+        const hasFix = text.includes("改法：");
+        const hasBoundary = text.includes("边界：");
+        const tooSalesy = /成交|下单|付款|¥|\\$/.test(text) && !text.includes("如果你想");
+
+        checks.innerHTML = "";
+        [
+          [hasProblem, "有具体问题"],
+          [hasFix, "有具体改法"],
+          [hasBoundary, "有边界"],
+          [!tooSalesy, "不是硬广语气"],
+        ].forEach(([ok, label]) => {
+          const div = document.createElement("div");
+          div.className = `check ${ok ? "" : "check--warn"}`;
+          div.textContent = ok ? label : `需要补：${label}`;
+          checks.appendChild(div);
+        });
+      }
+
+      function render() {
+        const text = buildReply();
+        output.textContent = text;
+        renderChecks(text);
+        return text;
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+
+        const field = document.createElement("textarea");
+        field.value = text;
+        field.setAttribute("readonly", "");
+        field.style.position = "fixed";
+        field.style.top = "-1000px";
+        document.body.appendChild(field);
+        field.select();
+        const copied = document.execCommand("copy");
+        document.body.removeChild(field);
+        return copied;
+      }
+
+      document.querySelector("#build").addEventListener("click", render);
+      document.querySelector("#copy").addEventListener("click", async () => {
+        const copied = await copyText(render());
+        copyState.textContent = copied ? "已复制。" : "复制失败，请手动选中草稿。";
+        setTimeout(() => {
+          copyState.textContent = "复制前确认对方确实在问相关问题。";
+        }, 1600);
+      });
+
+      Object.values(fields).forEach((field) => field.addEventListener("input", render));
+      render();
+    </script>
+  </body>
+</html>

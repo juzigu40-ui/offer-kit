@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>README 诊断生成器</title>
+    <style>
+      :root {
+        --ink: #17202a;
+        --muted: #5d6876;
+        --line: #d8dee7;
+        --paper: #f6f8fb;
+        --surface: #ffffff;
+        --green: #087f5b;
+        --green-dark: #065f46;
+        --blue: #1d4ed8;
+        --orange: #b45309;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      main {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 34px 0 58px;
+      }
+
+      .top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: end;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 24px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 10px;
+        font-size: clamp(34px, 6vw, 64px);
+        line-height: 1.06;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin-bottom: 12px;
+        font-size: 26px;
+        line-height: 1.2;
+      }
+
+      .sub {
+        max-width: 760px;
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 10px 14px;
+        color: var(--ink);
+        font-weight: 850;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .button--primary {
+        border-color: var(--green);
+        background: var(--green);
+        color: #ffffff;
+      }
+
+      .button--primary:hover {
+        background: var(--green-dark);
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(330px, 0.9fr);
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 18px;
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 850;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        color: var(--ink);
+      }
+
+      input,
+      select {
+        min-height: 42px;
+        padding: 0 12px;
+      }
+
+      textarea {
+        min-height: 90px;
+        resize: vertical;
+        padding: 12px;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .output {
+        min-height: 430px;
+        white-space: pre-wrap;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fbfcfd;
+        padding: 14px;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 14px;
+      }
+
+      .hint {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .checks {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .check {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 13px;
+      }
+
+      .check strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .check span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 880px) {
+        .top,
+        .layout,
+        .checks,
+        .split {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="top">
+        <div>
+          <h1>README 诊断生成器</h1>
+          <p class="sub">
+            给开源项目、微工具或小产品写 3 点 README 诊断。适合 GitHub Discussion、Indie Hackers、Reddit 和社群回复。
+          </p>
+        </div>
+        <a class="button" href="../../channels/lead-finder.html">找线索</a>
+      </section>
+
+      <section class="layout">
+        <form class="panel" id="auditForm">
+          <div class="split">
+            <div class="field">
+              <label for="project">项目名</label>
+              <input id="project" value="一个开源 CLI 工具" />
+            </div>
+            <div class="field">
+              <label for="reader">读者</label>
+              <input id="reader" value="第一次点进来的开发者" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="goal">README 现在想让读者做什么</label>
+            <select id="goal">
+              <option>安装并跑起来</option>
+              <option>理解项目适合谁</option>
+              <option>提交 issue 或 PR</option>
+              <option>购买或试用产品</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="current">现在第一屏写了什么</label>
+            <textarea id="current">标题下面主要写功能列表，但没有一条最短安装命令，也没说适合哪个具体场景。</textarea>
+          </div>
+
+          <div class="field">
+            <label for="missing">缺了什么信息</label>
+            <textarea id="missing">缺少最小可运行示例、输入输出样例、维护状态和贡献边界。</textarea>
+          </div>
+
+          <div class="field">
+            <label for="proof">已有证据或限制</label>
+            <textarea id="proof">项目还在早期，没有用户案例；本地 demo 能跑，但 API 还会变。</textarea>
+          </div>
+
+          <div class="field">
+            <label for="entry">可选入口</label>
+            <input id="entry" value="offer-kit/tools/readme-audit-builder/" />
+          </div>
+
+          <div class="actions">
+            <button class="button button--primary" type="submit">生成诊断</button>
+            <button class="button" id="copy" type="button">复制</button>
+            <a class="button" href="../../services/menu.html">服务菜单</a>
+          </div>
+        </form>
+
+        <aside class="panel">
+          <h2>可回复版本</h2>
+          <div class="output" id="output"></div>
+          <p class="hint" id="copyState">复制前确认对方正在求反馈，且社区允许相关工具链接。</p>
+        </aside>
+      </section>
+
+      <section class="checks" aria-label="发布前检查">
+        <article class="check">
+          <strong>先诊断</strong>
+          <span>回复正文先写 3 个可改点，不把链接放第一句。</span>
+        </article>
+        <article class="check">
+          <strong>留证据</strong>
+          <span>只说能从 README 里看到的事实，不猜用户量或技术质量。</span>
+        </article>
+        <article class="check">
+          <strong>留边界</strong>
+          <span>早期项目就写早期，不把未完成部分包装成能力。</span>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const ids = ["project", "reader", "goal", "current", "missing", "proof", "entry"];
+      const output = document.querySelector("#output");
+      const copy = document.querySelector("#copy");
+      const copyState = document.querySelector("#copyState");
+
+      function value(id) {
+        return document.querySelector(`#${id}`).value.trim();
+      }
+
+      function clean(text) {
+        return text
+          .replace(/全面提升|赋能|闭环|一站式|高质量|极致|颠覆/g, "")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      function build() {
+        const project = value("project") || "这个项目";
+        const reader = value("reader") || "第一次点进来的读者";
+        const goal = value("goal");
+        const current = clean(value("current"));
+        const missing = clean(value("missing"));
+        const proof = clean(value("proof"));
+        const entry = value("entry");
+
+        const linkLine = entry ? `\n\n如果要快速整理，我做了一个本地小工具：${entry}` : "";
+        output.textContent = `${project}的 README 我会先改三处：\n\n1. 第一屏先回答“${reader}为什么要继续看”。现在的问题是：${current}\n\n2. 下一段补一个最短路径。目标是让读者能${goal}，所以需要补：${missing}\n\n3. 边界不要藏起来。可以直接写：${proof}\n\n这样改完，读者不用猜项目状态，也能更快判断要不要安装、提 issue 或继续问。${linkLine}\n\n边界：只基于公开 README 做诊断，不承诺 star、转化、合并或付费结果。`;
+      }
+
+      document.querySelector("#auditForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        build();
+      });
+
+      ids.forEach((id) => {
+        const field = document.querySelector(`#${id}`);
+        field.addEventListener("input", build);
+        field.addEventListener("change", build);
+      });
+
+      copy.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(output.textContent);
+          copyState.textContent = "已复制。";
+        } catch {
+          copyState.textContent = "复制失败，请手动选择文本。";
+        }
+        setTimeout(() => {
+          copyState.textContent = "复制前确认对方正在求反馈，且社区允许相关工具链接。";
+        }, 1400);
+      });
+
+      build();
+    </script>
+  </body>
+</html>

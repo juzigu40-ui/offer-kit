@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PR、漏洞报告和小单文案 | ¥300 / $50 起</title>
+    <meta
+      name="description"
+      content="一个适合放在社交简介里的轻量入口页：去 AI 味文案、漏洞报告合规整理、PR 文案工具、公开交付页。"
+    />
+    <style>
+      :root {
+        --ink: #17202a;
+        --muted: #5d6876;
+        --line: #d8dee7;
+        --paper: #f6f8fb;
+        --surface: #ffffff;
+        --green: #087f5b;
+        --blue: #1d4ed8;
+        --orange: #b45309;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      main {
+        width: min(720px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 34px 0 56px;
+      }
+
+      .hero {
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 24px;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--orange);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 0 0 14px;
+        font-size: clamp(34px, 10vw, 56px);
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      .lead {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .price {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        margin-top: 18px;
+        border-radius: 999px;
+        background: #e8f5ef;
+        color: var(--green);
+        padding: 4px 12px;
+        font-weight: 900;
+      }
+
+      .links {
+        display: grid;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .link-card {
+        display: grid;
+        gap: 5px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 16px;
+        text-decoration: none;
+      }
+
+      .link-card strong {
+        color: var(--ink);
+        font-size: 17px;
+      }
+
+      .link-card span {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .link-card--primary {
+        border-color: var(--green);
+        background: var(--green);
+      }
+
+      .link-card--primary strong,
+      .link-card--primary span {
+        color: #ffffff;
+      }
+
+      .section {
+        margin-top: 28px;
+      }
+
+      .proof {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 16px;
+      }
+
+      .proof ul {
+        margin: 0;
+        padding-left: 20px;
+        color: var(--muted);
+      }
+
+      .proof li + li {
+        margin-top: 6px;
+      }
+
+      .small {
+        color: var(--muted);
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">PR、漏洞报告、小单文案</p>
+        <h1>把事实写清楚，少一点模板味</h1>
+        <p class="lead">
+          我做开源小修复，也帮人整理 PR、issue、漏洞报告、商品页和私信。只改表达和结构，不编验证、不做未授权测试。
+        </p>
+        <span class="price">¥300 / $50 起</span>
+      </section>
+
+      <nav class="links" aria-label="主要入口">
+        <a class="link-card link-card--primary" href="../services/menu.html">
+          <strong>看服务菜单</strong>
+          <span>文案、安全报告、PR 说明、商品页、资料包。</span>
+        </a>
+        <a class="link-card" href="../proof/">
+          <strong>看公开交付</strong>
+          <span>4 个已投 PR + 可打开工具，不伪造成交或背书。</span>
+        </a>
+        <a class="link-card" href="../tools/pr-note-builder/">
+          <strong>PR / Issue 回复生成器</strong>
+          <span>按问题、改动、验证、边界生成短文本。</span>
+        </a>
+        <a class="link-card" href="../tools/vuln-report-builder/">
+          <strong>合规漏洞报告生成器</strong>
+          <span>整理 Scope、Impact、Evidence、Mitigation、Boundaries。</span>
+        </a>
+        <a class="link-card" href="../services/intake.html">
+          <strong>生成下单材料</strong>
+          <span>先整理原文、发布位置、目标读者和不可改事实。</span>
+        </a>
+        <a class="link-card" href="../services/scope-confirmation.html">
+          <strong>确认小单范围</strong>
+          <span>付款前写清交付、价格、材料、时间和不包含事项。</span>
+        </a>
+        <a class="link-card" href="../channels/lead-finder.html">
+          <strong>找公开线索</strong>
+          <span>按场景生成手动搜索词和短回复，不群发私信。</span>
+        </a>
+      </nav>
+
+      <section class="section proof">
+        <h2>边界</h2>
+        <ul>
+          <li>不承诺成交、PR 合并、漏洞评级或 bounty payout。</li>
+          <li>不编造测试、客户、收益、review 或平台背书。</li>
+          <li>不做未授权测试，不处理真实 secret 或客户数据。</li>
+          <li>不群发私信，不代运营账号。</li>
+        </ul>
+      </section>
+
+      <p class="section small">
+        付款前先确认范围。普通文案备注 AI COPY；安全报告备注 SECURITY COPY。
+      </p>
+    </main>
+  </body>
+</html>

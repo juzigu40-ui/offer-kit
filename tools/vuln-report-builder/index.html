@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>合规漏洞报告生成器</title>
+    <style>
+      :root {
+        --ink: #17202a;
+        --muted: #5d6876;
+        --line: #d8dee7;
+        --paper: #f6f8fb;
+        --surface: #ffffff;
+        --green: #087f5b;
+        --blue: #1d4ed8;
+        --orange: #b45309;
+        --red: #b42318;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      main {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 34px 0 58px;
+      }
+
+      .top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 20px;
+        align-items: end;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 8px;
+        font-size: clamp(34px, 5vw, 58px);
+        line-height: 1.06;
+        letter-spacing: 0;
+      }
+
+      .sub {
+        max-width: 780px;
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 10px 14px;
+        color: var(--ink);
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .button--primary {
+        border-color: var(--green);
+        background: var(--green);
+        color: #ffffff;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(360px, 0.95fr);
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 18px;
+      }
+
+      .field,
+      .grid {
+        margin-bottom: 14px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      label,
+      legend {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        color: var(--ink);
+        font: inherit;
+      }
+
+      input,
+      select {
+        min-height: 42px;
+        padding: 0 12px;
+      }
+
+      textarea {
+        min-height: 88px;
+        resize: vertical;
+        padding: 12px;
+        line-height: 1.55;
+      }
+
+      .notice {
+        border-left: 4px solid var(--orange);
+        border-radius: 8px;
+        background: #fff8ed;
+        padding: 12px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .output {
+        min-height: 560px;
+        white-space: pre-wrap;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fbfcfd;
+        padding: 14px;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 13px;
+      }
+
+      .checks {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .check {
+        border-left: 4px solid var(--green);
+        border-radius: 8px;
+        background: #f4fbf7;
+        padding: 10px 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .check--warn {
+        border-left-color: var(--red);
+        background: #fff5f4;
+      }
+
+      .small {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 900px) {
+        .top,
+        .layout,
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .output {
+          min-height: 340px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="top">
+        <div>
+          <h1>合规漏洞报告生成器</h1>
+          <p class="sub">
+            把授权范围、复现步骤、影响、证据和限制写清楚。适合开源安全修复、漏洞平台草稿和维护者私下披露。
+          </p>
+        </div>
+        <a class="button" href="../../seeds/">返回撒种板</a>
+      </section>
+
+      <section class="layout">
+        <form class="panel">
+          <p class="notice">
+            只用于授权范围内的报告。不要测试第三方生产系统，不要提交真实 secret，不要写破坏性利用步骤。
+          </p>
+
+          <div class="grid" style="margin-top: 14px">
+            <div class="field">
+              <label for="program">项目 / 平台</label>
+              <input id="program" value="open-source repository" />
+            </div>
+            <div class="field">
+              <label for="severity">严重性</label>
+              <select id="severity">
+                <option>Low</option>
+                <option selected>Medium</option>
+                <option>High</option>
+                <option>Critical</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="title">标题</label>
+            <input id="title" value="Webhook URL accepts loopback and private hosts" />
+          </div>
+
+          <div class="field">
+            <label for="scope">授权范围</label>
+            <textarea id="scope">Public repository code review only. No production probing or live target testing.</textarea>
+          </div>
+
+          <div class="field">
+            <label for="affected">受影响位置</label>
+            <textarea id="affected">server/core/src/webhook_store.cpp - webhook URL validation before request dispatch.</textarea>
+          </div>
+
+          <div class="field">
+            <label for="steps">低风险复现</label>
+            <textarea id="steps">1. Create a webhook with a URL such as http://127.0.0.1:8080/callback.
+2. Observe that the host is accepted by URL validation.
+3. Repeat with RFC1918 or link-local addresses in a local test harness.</textarea>
+          </div>
+
+          <div class="field">
+            <label for="impact">影响</label>
+            <textarea id="impact">If requests are sent from the server network, internal-only HTTP services may be reachable through the webhook feature.</textarea>
+          </div>
+
+          <div class="field">
+            <label for="evidence">证据 / 验证</label>
+            <textarea id="evidence">Added unit tests for localhost, RFC1918, metadata IPs, local hostnames, local IPv6, and IPv4-mapped IPv6 edge cases.</textarea>
+          </div>
+
+          <div class="field">
+            <label for="mitigation">修复建议</label>
+            <textarea id="mitigation">Reject loopback, private, link-local, multicast, reserved, and local-name hosts before storing or dispatching webhooks.</textarea>
+          </div>
+
+          <div class="field">
+            <label for="limits">未做事项 / 边界</label>
+            <textarea id="limits">No production systems were probed. No credentials, customer data, or internal endpoints were accessed.</textarea>
+          </div>
+
+          <div class="actions">
+            <button class="button button--primary" type="button" id="build">生成报告</button>
+            <button class="button" type="button" id="copy">复制</button>
+            <a class="button" href="../pr-note-builder/">PR 文案</a>
+          </div>
+        </form>
+
+        <aside class="panel">
+          <h2>报告草稿</h2>
+          <div class="output" id="output"></div>
+          <p class="small" id="copyState">发布前确认平台规则、授权范围和证据截图。</p>
+          <div class="checks" id="checks"></div>
+        </aside>
+      </section>
+    </main>
+
+    <script>
+      const fields = {
+        program: document.querySelector("#program"),
+        severity: document.querySelector("#severity"),
+        title: document.querySelector("#title"),
+        scope: document.querySelector("#scope"),
+        affected: document.querySelector("#affected"),
+        steps: document.querySelector("#steps"),
+        impact: document.querySelector("#impact"),
+        evidence: document.querySelector("#evidence"),
+        mitigation: document.querySelector("#mitigation"),
+        limits: document.querySelector("#limits"),
+      };
+      const output = document.querySelector("#output");
+      const checks = document.querySelector("#checks");
+      const copyState = document.querySelector("#copyState");
+
+      function lines(text) {
+        return text
+          .split(/\n+/)
+          .map((line) => line.trim())
+          .filter(Boolean)
+          .join("\n");
+      }
+
+      function buildReport() {
+        return [
+          `Title: ${fields.title.value.trim() || "Untitled report"}`,
+          `Program: ${fields.program.value.trim() || "Not specified"}`,
+          `Severity: ${fields.severity.value}`,
+          "",
+          "Scope",
+          lines(fields.scope.value) || "Not specified. Do not submit until scope is clear.",
+          "",
+          "Affected area",
+          lines(fields.affected.value) || "Not specified.",
+          "",
+          "Low-risk reproduction",
+          lines(fields.steps.value) || "Not provided. Add local-only or authorized steps before submission.",
+          "",
+          "Impact",
+          lines(fields.impact.value) || "Not specified.",
+          "",
+          "Evidence / validation",
+          lines(fields.evidence.value) || "Not provided.",
+          "",
+          "Suggested mitigation",
+          lines(fields.mitigation.value) || "Not provided.",
+          "",
+          "Boundaries",
+          lines(fields.limits.value) ||
+            "No production probing, no credentials, no customer data, and no destructive testing.",
+        ].join("\n");
+      }
+
+      function renderChecks(text) {
+        const hasScope = /scope|授权|authorized|public repository|no production/i.test(text);
+        const hasBoundary = /no production|no credentials|no customer|不|未做|边界/i.test(text);
+        const hasEvidence = /test|evidence|validation|验证|证据|screenshot/i.test(text);
+        const hasImpact = /impact|may|could|影响/i.test(text);
+        const risky = /dump|exfiltrate|steal|bypass payment|真实 secret|生产系统攻击/i.test(text);
+
+        checks.innerHTML = "";
+        [
+          [hasScope, "写清授权范围"],
+          [hasBoundary, "写清未做事项"],
+          [hasEvidence, "有证据或验证"],
+          [hasImpact, "影响没有被夸大"],
+          [!risky, "没有破坏性利用措辞"],
+        ].forEach(([ok, label]) => {
+          const div = document.createElement("div");
+          div.className = `check ${ok ? "" : "check--warn"}`;
+          div.textContent = ok ? label : `需要补：${label}`;
+          checks.appendChild(div);
+        });
+      }
+
+      function render() {
+        const report = buildReport();
+        output.textContent = report;
+        renderChecks(report);
+        return report;
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+
+        const field = document.createElement("textarea");
+        field.value = text;
+        field.setAttribute("readonly", "");
+        field.style.position = "fixed";
+        field.style.top = "-1000px";
+        document.body.appendChild(field);
+        field.select();
+        const copied = document.execCommand("copy");
+        document.body.removeChild(field);
+        return copied;
+      }
+
+      document.querySelector("#build").addEventListener("click", render);
+      document.querySelector("#copy").addEventListener("click", async () => {
+        const copied = await copyText(render());
+        copyState.textContent = copied ? "已复制。" : "复制失败，请手动选中草稿。";
+        setTimeout(() => {
+          copyState.textContent = "发布前确认平台规则、授权范围和证据截图。";
+        }, 1600);
+      });
+
+      Object.values(fields).forEach((field) => field.addEventListener("input", render));
+      render();
+    </script>
+  </body>
+</html>

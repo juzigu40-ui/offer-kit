@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>范围确认单 | 小单成交前确认</title>
+    <meta
+      name="description"
+      content="把小单服务的交付、价格、材料、时间和不包含事项整理成付款前确认文本。"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .scope-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+        gap: 18px;
+      }
+
+      .scope-panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 18px;
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        color: var(--ink);
+        font: inherit;
+      }
+
+      input,
+      select {
+        min-height: 42px;
+        padding: 0 12px;
+      }
+
+      textarea {
+        min-height: 88px;
+        resize: vertical;
+        padding: 12px;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .output {
+        min-height: 520px;
+        white-space: pre-wrap;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fbfcfd;
+        padding: 14px;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 14px;
+      }
+
+      .scope-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .small-note {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 880px) {
+        .scope-layout,
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html">AI 小单成交包</a>
+      <nav class="nav" aria-label="页面导航">
+        <a href="./menu.html">菜单</a>
+        <a href="./intake.html">下单单</a>
+        <a href="../proof/">交付页</a>
+        <a href="../seeds/">撒种</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero hero--compact">
+        <div class="hero__content">
+          <p class="eyebrow">付款前确认，不含承诺</p>
+          <h1>把小单范围说清楚再收钱</h1>
+          <p class="lead">
+            用于有人问价或准备付款时。生成一段确认文本：交付什么、多少钱、需要什么材料、什么时候给、不包含什么。
+          </p>
+        </div>
+        <aside class="price-panel" aria-label="价格信息">
+          <span class="price-panel__label">默认小单</span>
+          <strong>¥300 / $50</strong>
+          <p>只确认范围，不处理真实付款。</p>
+        </aside>
+      </section>
+
+      <section class="section scope-layout">
+        <form class="scope-panel" id="scopeForm">
+          <div class="two-col">
+            <div class="field">
+              <label for="service">服务类型</label>
+              <select id="service">
+                <option>去 AI 味文案急救</option>
+                <option>漏洞报告合规急救</option>
+                <option>PR / Issue 文案整理</option>
+                <option>商品页首屏急救</option>
+                <option>README 首屏诊断</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="price">价格</label>
+              <input id="price" value="¥300 / $50" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="deliverable">交付物</label>
+            <textarea id="deliverable">改 1 版正文，附 3 条删改原因；长度控制在 3 段以内。</textarea>
+          </div>
+
+          <div class="field">
+            <label for="materials">需要对方提供</label>
+            <textarea id="materials">原文或草稿、发布位置、目标读者、不能改动的事实。安全报告还需要授权范围。</textarea>
+          </div>
+
+          <div class="two-col">
+            <div class="field">
+              <label for="deadline">交付时间</label>
+              <input id="deadline" value="收到材料后 24 小时内" />
+            </div>
+            <div class="field">
+              <label for="note">付款备注</label>
+              <input id="note" value="AI COPY" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="excluded">不包含</label>
+            <textarea id="excluded">成交承诺、PR 合并承诺、漏洞评级承诺、账号代运营、群发私信、未授权测试、真实支付代处理。</textarea>
+          </div>
+
+          <div class="scope-actions">
+            <button class="button button--primary" type="submit">生成确认文本</button>
+            <button class="button button--secondary" id="copy" type="button">复制</button>
+            <a class="button button--secondary" href="./menu.html">回菜单</a>
+          </div>
+        </form>
+
+        <aside class="scope-panel">
+          <h2>确认文本</h2>
+          <div class="output" id="output"></div>
+          <p class="small-note" id="copyState">复制前确认材料完整；不替对方付款，不承诺结果。</p>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>确认文本只用于沟通范围，不构成收益承诺、平台通过承诺或付款处理。</p>
+    </footer>
+
+    <script>
+      const ids = ["service", "price", "deliverable", "materials", "deadline", "note", "excluded"];
+      const output = document.querySelector("#output");
+      const copy = document.querySelector("#copy");
+      const copyState = document.querySelector("#copyState");
+
+      function value(id) {
+        return document.querySelector(`#${id}`).value.trim();
+      }
+
+      function build() {
+        const service = value("service");
+        const price = value("price");
+        const deliverable = value("deliverable");
+        const materials = value("materials");
+        const deadline = value("deadline");
+        const note = value("note");
+        const excluded = value("excluded");
+
+        output.textContent = `可以做，先确认范围：\n\n服务：${service}\n价格：${price}\n交付：${deliverable}\n需要你提供：${materials}\n时间：${deadline}\n付款备注：${note}\n\n不包含：${excluded}\n\n如果这个范围没问题，再付款。付款后我只按上面的范围交付；如果材料不完整，我会先补问，不会硬改。`;
+      }
+
+      document.querySelector("#scopeForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        build();
+      });
+
+      ids.forEach((id) => {
+        const field = document.querySelector(`#${id}`);
+        field.addEventListener("input", build);
+        field.addEventListener("change", build);
+      });
+
+      copy.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(output.textContent);
+          copyState.textContent = "已复制。";
+        } catch {
+          copyState.textContent = "复制失败，请手动选择文本。";
+        }
+        setTimeout(() => {
+          copyState.textContent = "复制前确认材料完整；不替对方付款，不承诺结果。";
+        }, 1400);
+      });
+
+      build();
+    </script>
+  </body>
+</html>

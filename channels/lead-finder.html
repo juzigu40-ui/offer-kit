@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>线索查找器 | 小单获客查询</title>
+    <style>
+      :root {
+        --ink: #17202a;
+        --muted: #5f6b7a;
+        --line: #d9e0e8;
+        --paper: #f6f8fb;
+        --surface: #ffffff;
+        --green: #087f5b;
+        --green-dark: #065f46;
+        --blue: #1d4ed8;
+        --orange: #b45309;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      main {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 34px 0 64px;
+      }
+
+      .top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 330px;
+        gap: 24px;
+        align-items: end;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 26px;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--orange);
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin-bottom: 14px;
+        font-size: clamp(36px, 7vw, 68px);
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin-bottom: 14px;
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      .lead {
+        max-width: 720px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .boundary {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 18px;
+      }
+
+      .boundary strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--blue);
+        font-size: 20px;
+      }
+
+      .boundary p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .workbench {
+        display: grid;
+        grid-template-columns: 360px minmax(0, 1fr);
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .panel,
+      .result {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .panel {
+        padding: 18px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        color: var(--ink);
+        padding: 10px 12px;
+      }
+
+      textarea {
+        min-height: 126px;
+        resize: vertical;
+      }
+
+      .field + .field {
+        margin-top: 16px;
+      }
+
+      .toggles {
+        display: grid;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .toggle {
+        display: grid;
+        grid-template-columns: 20px minmax(0, 1fr);
+        gap: 8px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 9px 13px;
+        color: var(--ink);
+        font-weight: 850;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .button--primary {
+        border-color: var(--green);
+        background: var(--green);
+        color: #ffffff;
+      }
+
+      .button--primary:hover {
+        background: var(--green-dark);
+      }
+
+      .result {
+        overflow: hidden;
+      }
+
+      .result__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        border-bottom: 1px solid var(--line);
+        padding: 16px 18px;
+      }
+
+      .result__head p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        min-width: 760px;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 12px 14px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      code {
+        color: var(--blue);
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      .draft {
+        border-top: 1px solid var(--line);
+        background: #fbfcfe;
+        padding: 18px;
+      }
+
+      .draft textarea {
+        min-height: 172px;
+        background: #ffffff;
+      }
+
+      .checks {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .check {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 14px;
+      }
+
+      .check strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .check span {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      @media (max-width: 900px) {
+        .top,
+        .workbench,
+        .checks {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="top">
+        <div>
+          <p class="eyebrow">手动找线索，不群发</p>
+          <h1>线索查找器</h1>
+          <p class="lead">
+            生成公开搜索词和短回复角度。只用于手动查找相关问题，不自动登录、不抓取、不发私信。
+          </p>
+        </div>
+        <aside class="boundary">
+          <strong>回复前先看规则</strong>
+          <p>对方没有提到类似问题时，不放链接。社区禁止自推广时，只回答问题。</p>
+        </aside>
+      </section>
+
+      <section class="workbench" aria-label="线索查找器">
+        <form class="panel" id="leadForm">
+          <div class="field">
+            <label for="offer">要找哪类需求</label>
+            <select id="offer">
+              <option value="pr">PR / Issue 文案</option>
+              <option value="security">漏洞报告整理</option>
+              <option value="product">商品页 / 服务页改写</option>
+              <option value="pricing">300 元小单定价</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="platform">优先平台</label>
+            <select id="platform">
+              <option value="all">全部平台</option>
+              <option value="github">GitHub</option>
+              <option value="dev">开发者社区</option>
+              <option value="security">安全社区</option>
+              <option value="cn">中文内容平台</option>
+              <option value="market">上架平台</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="context">本轮侧重点</label>
+            <textarea id="context">找近期有人问“怎么写清楚”“怎么避免 AI 味”“报告被退回”“PR 描述太虚”的公开帖子。先给具体建议，再决定是否放入口。</textarea>
+          </div>
+
+          <div class="toggles" aria-label="筛选边界">
+            <label class="toggle">
+              <input type="checkbox" id="recentOnly" checked />
+              <span>优先最近 7 天内容</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="noColdDm" checked />
+              <span>不生成陌生私信话术</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="noLinkFirst" checked />
+              <span>回复先写建议，链接放最后</span>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button class="button button--primary" type="submit">生成查询</button>
+            <button class="button" id="copyDraft" type="button">复制短回复</button>
+          </div>
+        </form>
+
+        <section class="result" aria-live="polite">
+          <div class="result__head">
+            <div>
+              <h2>本轮查询</h2>
+              <p id="resultNote">按相关度排序，手动打开搜索即可。</p>
+            </div>
+            <a class="button" href="./distribution-map.md">投放清单</a>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>平台</th>
+                  <th>查询词</th>
+                  <th>判断标准</th>
+                  <th>入口</th>
+                </tr>
+              </thead>
+              <tbody id="results"></tbody>
+            </table>
+          </div>
+          <div class="draft">
+            <label for="replyDraft">短回复草稿</label>
+            <textarea id="replyDraft" readonly></textarea>
+          </div>
+        </section>
+      </section>
+
+      <section class="checks" aria-label="回复检查">
+        <article class="check">
+          <strong>相关</strong>
+          <span>只回正在问这个问题的人，不把搜索结果当广告位。</span>
+        </article>
+        <article class="check">
+          <strong>具体</strong>
+          <span>指出一个问题和一个改法，别上来写“全套解决方案”。</span>
+        </article>
+        <article class="check">
+          <strong>克制</strong>
+          <span>不写成交承诺、赏金承诺、客户截图或未验证结果。</span>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const rows = {
+        pr: [
+          ["GitHub", "\"PR description\" \"unclear\" \"review\""],
+          ["GitHub", "\"issue\" \"steps to reproduce\" \"expected behavior\""],
+          ["开发者社区", "site:news.ycombinator.com PR description review unclear"],
+          ["开发者社区", "site:reddit.com/r/github \"pull request\" \"description\""],
+          ["中文内容平台", "PR 描述 怎么写 不像 AI"],
+          ["中文内容平台", "代码 review 回复 怎么写 清楚"],
+        ],
+        security: [
+          ["GitHub", "\"security report\" \"impact\" \"scope\""],
+          ["GitHub", "\"bug bounty\" \"report\" \"triage\""],
+          ["安全社区", "site:reddit.com/r/bugbounty report rejected impact scope"],
+          ["安全社区", "site:hackerone.com/reports \"impact\" \"scope\""],
+          ["中文内容平台", "漏洞报告 怎么写 影响 范围"],
+          ["中文内容平台", "SRC 漏洞报告 被驳回 怎么改"],
+        ],
+        product: [
+          ["开发者社区", "\"landing page\" \"feedback\" \"copy\""],
+          ["开发者社区", "site:indiehackers.com landing page copy feedback"],
+          ["上架平台", "site:gumroad.com \"template\" \"copy\" \"freelance\""],
+          ["中文内容平台", "商品页 文案 改写 AI 味"],
+          ["中文内容平台", "小红书 服务页 文案 怎么写"],
+          ["GitHub", "\"README\" \"copy\" \"clarity\" \"help wanted\""],
+        ],
+        pricing: [
+          ["中文内容平台", "300 元 小单 服务 定价"],
+          ["中文内容平台", "自由职业 小单 怎么报价"],
+          ["开发者社区", "\"$50\" \"freelance\" \"quick audit\""],
+          ["开发者社区", "site:reddit.com/r/freelance \"$50\" \"review\""],
+          ["上架平台", "site:ko-fi.com commissions copywriting review"],
+          ["上架平台", "site:payhip.com digital product copy template"],
+        ],
+      };
+
+      const filters = {
+        all: () => true,
+        github: (row) => row[0] === "GitHub",
+        dev: (row) => row[0] === "开发者社区",
+        security: (row) => row[0] === "安全社区" || row[0] === "GitHub",
+        cn: (row) => row[0] === "中文内容平台",
+        market: (row) => row[0] === "上架平台",
+      };
+
+      const links = {
+        pr: "../tools/pr-note-builder/",
+        security: "../tools/vuln-report-builder/",
+        product: "../services/intake.html",
+        pricing: "../services/menu.html",
+      };
+
+      const angles = {
+        pr: "这段可以先拆成四句：问题在哪、改了什么、怎么验证、还有什么没覆盖。先别写“提升体验”，维护者更想看可复查的信息。",
+        security:
+          "报告可以先补三块：授权范围、低风险复现、影响边界。不要把可能影响写成已经接管，也不要放未授权系统细节。",
+        product:
+          "页面先写交付物、材料要求、价格和不包含事项。形容词少一点，买家更容易判断要不要继续问。",
+        pricing:
+          "300 元小单要把范围压小：一版修改、一个页面或一份报告，不包长期运营。先确认材料和边界，再谈付款。",
+      };
+
+      const form = document.querySelector("#leadForm");
+      const results = document.querySelector("#results");
+      const replyDraft = document.querySelector("#replyDraft");
+      const copyDraft = document.querySelector("#copyDraft");
+      const resultNote = document.querySelector("#resultNote");
+
+      function searchUrl(platform, query) {
+        const encoded = encodeURIComponent(query);
+        if (platform === "GitHub") {
+          return `https://github.com/search?q=${encoded}&type=issues`;
+        }
+        if (platform === "中文内容平台") {
+          return `https://www.google.com/search?q=${encoded}`;
+        }
+        return `https://www.google.com/search?q=${encoded}`;
+      }
+
+      function makeRows() {
+        const offer = document.querySelector("#offer").value;
+        const platform = document.querySelector("#platform").value;
+        const recentOnly = document.querySelector("#recentOnly").checked;
+        const noLinkFirst = document.querySelector("#noLinkFirst").checked;
+        const picked = rows[offer].filter(filters[platform]).slice(0, 6);
+
+        results.innerHTML = picked
+          .map(([name, query]) => {
+            const datedQuery = recentOnly ? `${query} after:2026-05-14` : query;
+            const standard =
+              name === "GitHub"
+                ? "有明确问题、少评论、能公开回复"
+                : "对方正在求改法，平台允许相关链接";
+            return `<tr>
+              <td>${name}</td>
+              <td><code>${datedQuery}</code></td>
+              <td>${standard}</td>
+              <td><a href="${searchUrl(name, datedQuery)}" target="_blank" rel="noreferrer">打开搜索</a></td>
+            </tr>`;
+          })
+          .join("");
+
+        const context = document.querySelector("#context").value.trim();
+        const linkLine = noLinkFirst ? `\n\n如果需要工具，我这里有一个本地入口：${links[offer]}` : "";
+        replyDraft.value = `${angles[offer]}\n\n我会先看原文和发布位置，再判断哪些话该删、哪些验证必须保留。${linkLine}\n\n边界：不编事实，不承诺成交或赏金，不做未授权测试。`;
+        resultNote.textContent = context || "按相关度排序，手动打开搜索即可。";
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        makeRows();
+      });
+
+      ["offer", "platform", "context", "recentOnly", "noColdDm", "noLinkFirst"].forEach((id) => {
+        const field = document.querySelector(`#${id}`);
+        field.addEventListener("input", makeRows);
+        field.addEventListener("change", makeRows);
+      });
+
+      copyDraft.addEventListener("click", async () => {
+        replyDraft.select();
+        try {
+          await navigator.clipboard.writeText(replyDraft.value);
+          copyDraft.textContent = "已复制";
+        } catch {
+          document.execCommand("copy");
+          copyDraft.textContent = "已复制";
+        }
+        setTimeout(() => {
+          copyDraft.textContent = "复制短回复";
+        }, 1400);
+      });
+
+      makeRows();
+    </script>
+  </body>
+</html>

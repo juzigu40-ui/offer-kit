@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PR / Issue 回复生成器</title>
+    <style>
+      :root {
+        --ink: #17202a;
+        --muted: #5d6876;
+        --line: #d8dee7;
+        --paper: #f6f8fb;
+        --surface: #ffffff;
+        --green: #087f5b;
+        --green-dark: #065f46;
+        --blue: #1d4ed8;
+        --orange: #b45309;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      main {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 34px 0 58px;
+      }
+
+      .top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 20px;
+        align-items: end;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 8px;
+        font-size: clamp(34px, 5vw, 58px);
+        line-height: 1.06;
+        letter-spacing: 0;
+      }
+
+      .sub {
+        max-width: 760px;
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 10px 14px;
+        color: var(--ink);
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .button--primary {
+        border-color: var(--green);
+        background: var(--green);
+        color: #ffffff;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(360px, 0.92fr);
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 18px;
+      }
+
+      label,
+      legend {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .field {
+        margin-bottom: 14px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #ffffff;
+        color: var(--ink);
+        font: inherit;
+      }
+
+      input,
+      select {
+        min-height: 42px;
+        padding: 0 12px;
+      }
+
+      textarea {
+        min-height: 96px;
+        resize: vertical;
+        padding: 12px;
+        line-height: 1.55;
+      }
+
+      .small {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .output {
+        min-height: 520px;
+        white-space: pre-wrap;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fbfcfd;
+        padding: 14px;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 13px;
+      }
+
+      .checks {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .check {
+        border-left: 4px solid var(--green);
+        border-radius: 8px;
+        background: #f4fbf7;
+        padding: 10px 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .check--warn {
+        border-left-color: var(--orange);
+        background: #fff8ed;
+      }
+
+      @media (max-width: 900px) {
+        .top,
+        .layout,
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .output {
+          min-height: 320px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="top">
+        <div>
+          <h1>PR / Issue 回复生成器</h1>
+          <p class="sub">
+            把 issue、改动、验证和边界整理成能直接贴到 GitHub 的短文本。只帮你压实表达，不替你编测试结果。
+          </p>
+        </div>
+        <a class="button" href="../../seeds/">返回撒种板</a>
+      </section>
+
+      <section class="layout">
+        <form class="panel" id="noteForm">
+          <div class="grid">
+            <div class="field">
+              <label for="mode">输出类型</label>
+              <select id="mode">
+                <option value="pr">PR 描述</option>
+                <option value="attempt">Issue attempt</option>
+                <option value="reply">Review 回复</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="issue">Issue / PR 号</label>
+              <input id="issue" value="#1050" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="problem">具体问题</label>
+            <textarea id="problem">`on_event()` accepts blank event names and stores them in handler metadata.</textarea>
+          </div>
+
+          <div class="field">
+            <label for="change">改了什么</label>
+            <textarea id="change">Reject non-string, empty, and whitespace-only event names before metadata is written.</textarea>
+          </div>
+
+          <div class="field">
+            <label for="files">涉及文件</label>
+            <input id="files" value="src/sdk/decorators.py, tests/test_sdk_decorators.py" />
+            <p class="small">写文件、模块或页面名，不写“全仓库优化”。</p>
+          </div>
+
+          <div class="field">
+            <label for="validation">验证</label>
+            <textarea id="validation">uv run pytest tests/test_sdk_decorators.py -> 3 passed
+uv run flake8 src/sdk/decorators.py tests/test_sdk_decorators.py -> passed</textarea>
+          </div>
+
+          <div class="field">
+            <label for="limits">边界 / 已知未完成</label>
+            <textarea id="limits">Full test suite is still blocked by an existing scheduler import error unrelated to this patch.</textarea>
+          </div>
+
+          <div class="actions">
+            <button class="button button--primary" id="build" type="button">生成</button>
+            <button class="button" id="copy" type="button">复制</button>
+            <a class="button" href="../no-ai-checker/">先自检</a>
+          </div>
+        </form>
+
+        <aside class="panel">
+          <h2>输出</h2>
+          <div class="output" id="output"></div>
+          <p class="small" id="copyState">生成后可复制。发布前再核对真实命令和结果。</p>
+          <div class="checks" id="checks"></div>
+        </aside>
+      </section>
+    </main>
+
+    <script>
+      const mode = document.querySelector("#mode");
+      const issue = document.querySelector("#issue");
+      const problem = document.querySelector("#problem");
+      const change = document.querySelector("#change");
+      const files = document.querySelector("#files");
+      const validation = document.querySelector("#validation");
+      const limits = document.querySelector("#limits");
+      const output = document.querySelector("#output");
+      const checks = document.querySelector("#checks");
+      const copyState = document.querySelector("#copyState");
+
+      const vagueWords = [
+        "comprehensive",
+        "enterprise-grade",
+        "seamless",
+        "seamlessly",
+        "robust",
+        "best practices",
+        "revolutionary",
+        "全面",
+        "企业级",
+        "无缝",
+        "颠覆",
+        "赋能",
+      ];
+
+      function cleanLine(line) {
+        let result = line.trim();
+        vagueWords.forEach((word) => {
+          result = result.replace(new RegExp(word, "gi"), "").replace(/\s+/g, " ");
+        });
+        return result.trim();
+      }
+
+      function bulletize(text) {
+        return text
+          .split(/\n+/)
+          .map(cleanLine)
+          .filter(Boolean)
+          .map((line) => `- ${line}`)
+          .join("\n");
+      }
+
+      function buildText() {
+        const issueText = issue.value.trim();
+        const problemText = cleanLine(problem.value);
+        const changeText = cleanLine(change.value);
+        const filesText = cleanLine(files.value);
+        const validationText = bulletize(validation.value);
+        const limitsText = cleanLine(limits.value);
+
+        if (mode.value === "attempt") {
+          return [
+            `/attempt ${issueText}`,
+            "",
+            "Plan:",
+            `- Reproduce the failing path around ${problemText}`,
+            `- Patch ${filesText || "the affected files"} with the smallest behavior change.`,
+            "- Add a focused regression test.",
+            "- Report the exact validation commands in the PR.",
+            "",
+            "I will avoid touching unrelated files.",
+          ].join("\n");
+        }
+
+        if (mode.value === "reply") {
+          return [
+            "Updated.",
+            "",
+            `Change: ${changeText}`,
+            filesText ? `Files: ${filesText}` : "",
+            "",
+            "Validation:",
+            validationText || "- Not run yet; reason needed before posting.",
+            "",
+            limitsText ? `Boundary: ${limitsText}` : "Boundary: no unrelated behavior changes intended.",
+          ]
+            .filter((line) => line !== "")
+            .join("\n");
+        }
+
+        return [
+          `${issueText ? `Fixes ${issueText}` : "Fixes the reported issue"}.`,
+          "",
+          "Problem:",
+          `- ${problemText || "Describe the failing path before posting."}`,
+          "",
+          "Change:",
+          `- ${changeText || "Describe the behavior change before posting."}`,
+          filesText ? `- Files: ${filesText}` : "",
+          "",
+          "Validation:",
+          validationText || "- Not run yet; reason needed before posting.",
+          "",
+          limitsText ? "Known boundary:" : "",
+          limitsText ? `- ${limitsText}` : "",
+        ]
+          .filter((line) => line !== "")
+          .join("\n");
+      }
+
+      function renderChecks(text) {
+        const hasValidation = /->|passed|failed|not run|未跑|通过|失败/i.test(text);
+        const hasFiles = /[\w/-]+\.(js|ts|tsx|py|rs|go|cpp|hpp|md|html|css)/i.test(text);
+        const hasBoundary = /boundary|known|not run|unrelated|边界|未完成|不|不会/i.test(text);
+        const hasVague = vagueWords.some((word) => text.toLowerCase().includes(word.toLowerCase()));
+
+        checks.innerHTML = "";
+        [
+          [hasValidation, "有验证或未验证原因"],
+          [hasFiles, "有具体文件或模块"],
+          [hasBoundary, "有边界说明"],
+          [!hasVague, "没有明显模板词"],
+        ].forEach(([ok, label]) => {
+          const div = document.createElement("div");
+          div.className = `check ${ok ? "" : "check--warn"}`;
+          div.textContent = ok ? label : `需要补：${label}`;
+          checks.appendChild(div);
+        });
+      }
+
+      function render() {
+        const text = buildText();
+        output.textContent = text;
+        renderChecks(text);
+        return text;
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+
+        const field = document.createElement("textarea");
+        field.value = text;
+        field.setAttribute("readonly", "");
+        field.style.position = "fixed";
+        field.style.top = "-1000px";
+        document.body.appendChild(field);
+        field.select();
+        const copied = document.execCommand("copy");
+        document.body.removeChild(field);
+        return copied;
+      }
+
+      document.querySelector("#build").addEventListener("click", render);
+      document.querySelector("#copy").addEventListener("click", async () => {
+        const copied = await copyText(render());
+        copyState.textContent = copied ? "已复制。" : "复制失败，请手动选中输出。";
+        setTimeout(() => {
+          copyState.textContent = "生成后可复制。发布前再核对真实命令和结果。";
+        }, 1600);
+      });
+
+      [mode, issue, problem, change, files, validation, limits].forEach((item) => {
+        item.addEventListener("input", render);
+      });
+
+      render();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>文案去 AI 味自检</title>
+    <style>
+      :root {
+        --ink: #17202a;
+        --muted: #5d6876;
+        --line: #d8dee7;
+        --paper: #f6f8fb;
+        --surface: #ffffff;
+        --green: #087f5b;
+        --blue: #1d4ed8;
+        --orange: #b45309;
+        --red: #b42318;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      main {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 34px 0 58px;
+      }
+
+      .top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 20px;
+        align-items: end;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 8px;
+        font-size: clamp(34px, 5vw, 58px);
+        line-height: 1.06;
+        letter-spacing: 0;
+      }
+
+      .sub {
+        max-width: 760px;
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 10px 14px;
+        color: var(--ink);
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .button--primary {
+        border-color: var(--green);
+        background: var(--green);
+        color: #ffffff;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        padding: 18px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 430px;
+        resize: vertical;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px;
+        color: var(--ink);
+        font: inherit;
+        line-height: 1.55;
+      }
+
+      textarea:focus {
+        outline: 3px solid rgba(29, 78, 216, 0.16);
+        border-color: var(--blue);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .score {
+        display: grid;
+        grid-template-columns: 112px minmax(0, 1fr);
+        gap: 16px;
+        align-items: center;
+      }
+
+      .meter {
+        display: grid;
+        place-items: center;
+        width: 112px;
+        height: 112px;
+        border: 10px solid #dce7ff;
+        border-radius: 50%;
+        color: var(--blue);
+        font-size: 32px;
+        font-weight: 900;
+      }
+
+      .score p {
+        margin-bottom: 0;
+        color: var(--muted);
+      }
+
+      .list {
+        display: grid;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .item {
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--orange);
+        border-radius: 8px;
+        padding: 12px;
+      }
+
+      .item strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .item p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .item--ok {
+        border-left-color: var(--green);
+      }
+
+      .item--bad {
+        border-left-color: var(--red);
+      }
+
+      .output {
+        min-height: 180px;
+        white-space: pre-wrap;
+      }
+
+      .small {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 900px) {
+        .top,
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        textarea {
+          min-height: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="top">
+        <div>
+          <h1>文案去 AI 味自检</h1>
+          <p class="sub">粘贴 PR、issue、私信或商品页文案，先抓模板词、空泛承诺和验证缺口。</p>
+        </div>
+        <a class="button" href="../../seeds/">返回撒种板</a>
+      </section>
+
+      <section class="layout">
+        <div class="panel">
+          <label for="source">原文</label>
+          <textarea id="source" spellcheck="false">Fixes #123.
+
+This PR provides a comprehensive and enterprise-grade solution that seamlessly improves the user experience. It leverages best practices and robust validation to ensure reliability.
+
+Validation:
+- tests passed</textarea>
+          <div class="actions">
+            <button class="button button--primary" id="check" type="button">自检</button>
+            <button class="button" id="shorten" type="button">生成短版</button>
+            <a class="button" href="../../services/no-ai-copy-polish.md">人工改稿说明</a>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <div class="score">
+            <div class="meter" id="score">--</div>
+            <div>
+              <h2 id="grade">等待输入</h2>
+              <p id="summary">结果会按模板感、可信度和验证信息给出。</p>
+            </div>
+          </div>
+          <div class="list" id="findings"></div>
+        </aside>
+      </section>
+
+      <section class="panel" style="margin-top: 18px">
+        <h2>短版草稿</h2>
+        <div class="output" id="output">点击“生成短版”后显示。</div>
+        <p class="small">这里只做表达整理，不替你编造测试、客户、收益或平台背书。</p>
+      </section>
+    </main>
+
+    <script>
+      const source = document.querySelector("#source");
+      const scoreEl = document.querySelector("#score");
+      const gradeEl = document.querySelector("#grade");
+      const summaryEl = document.querySelector("#summary");
+      const findingsEl = document.querySelector("#findings");
+      const outputEl = document.querySelector("#output");
+
+      const banned = [
+        ["comprehensive", "范围太大，换成具体改了什么"],
+        ["enterprise-grade", "没有验收标准时不要写企业级"],
+        ["seamlessly", "删掉，写具体体验变化"],
+        ["robust", "写清楚防住了什么边界"],
+        ["best practices", "换成具体规则或测试"],
+        ["leverage", "换成普通动词"],
+        ["革命性", "删掉或换成事实"],
+        ["颠覆", "删掉或换成事实"],
+        ["全方位", "写清楚范围"],
+        ["赋能", "删掉或换成动作"],
+        ["闭环", "写清楚下一步"],
+        ["极致", "删掉或换成指标"],
+      ];
+
+      function splitSentences(text) {
+        return text
+          .replace(/\r/g, "")
+          .split(/(?<=[.!?。！？])\s+|\n+/)
+          .map((line) => line.trim())
+          .filter(Boolean);
+      }
+
+      function analyze(text) {
+        const lower = text.toLowerCase();
+        const hits = banned.filter(([word]) => lower.includes(word.toLowerCase()));
+        const sentences = splitSentences(text);
+        const longSentences = sentences.filter((line) => line.length > 150);
+        const hasValidation = /validation|test|passed|failed|验证|测试|通过|失败/i.test(text);
+        const hasBoundary = /not|does not|不|不会|边界|限制|无法|失败/i.test(text);
+        const hasConcreteFile = /[\w/-]+\.(js|ts|tsx|py|rs|go|cpp|hpp|md|html|css)/i.test(text);
+
+        let penalty = hits.length * 9 + longSentences.length * 6;
+        if (!hasValidation) penalty += 18;
+        if (!hasBoundary) penalty += 10;
+        if (!hasConcreteFile) penalty += 8;
+        const score = Math.max(0, Math.min(100, 100 - penalty));
+
+        const findings = [];
+        if (hits.length) {
+          findings.push({
+            kind: "bad",
+            title: `模板词 ${hits.length} 个`,
+            body: hits.map(([word, note]) => `${word}: ${note}`).join("；"),
+          });
+        }
+        if (longSentences.length) {
+          findings.push({
+            kind: "bad",
+            title: `长句 ${longSentences.length} 个`,
+            body: "拆成短句：问题、改动、验证、边界分开写。",
+          });
+        }
+        findings.push({
+          kind: hasValidation ? "ok" : "bad",
+          title: hasValidation ? "有验证信息" : "缺验证信息",
+          body: hasValidation ? "保留命令、结果和失败原因。" : "补一行命令和结果；没跑就写没跑的原因。",
+        });
+        findings.push({
+          kind: hasBoundary ? "ok" : "bad",
+          title: hasBoundary ? "有边界说明" : "缺边界说明",
+          body: hasBoundary ? "边界能减少误解。" : "补不包含什么、没验证什么、需要什么权限。",
+        });
+        findings.push({
+          kind: hasConcreteFile ? "ok" : "bad",
+          title: hasConcreteFile ? "有具体对象" : "缺具体对象",
+          body: hasConcreteFile ? "文件名或模块名能提高可信度。" : "补文件、模块、接口或页面名称。",
+        });
+
+        return { score, findings };
+      }
+
+      function render() {
+        const text = source.value.trim();
+        const result = analyze(text);
+        scoreEl.textContent = result.score;
+        gradeEl.textContent = result.score >= 78 ? "可以发布" : result.score >= 55 ? "需要压实" : "先别发";
+        summaryEl.textContent =
+          result.score >= 78
+            ? "问题不多，发布前再确认事实。"
+            : "先删模板词，再补验证和边界。";
+
+        findingsEl.innerHTML = "";
+        result.findings.forEach((finding) => {
+          const div = document.createElement("div");
+          div.className = `item item--${finding.kind}`;
+          div.innerHTML = `<strong>${finding.title}</strong><p>${finding.body}</p>`;
+          findingsEl.appendChild(div);
+        });
+      }
+
+      function makeShortDraft(text) {
+        const lines = splitSentences(text)
+          .map((line) =>
+            banned.reduce(
+              (current, [word]) => current.replace(new RegExp(word, "gi"), "").replace(/\s+/g, " "),
+              line,
+            ),
+          )
+          .map((line) => line.trim())
+          .filter(Boolean)
+          .slice(0, 6);
+
+        return lines.length
+          ? lines.join("\n")
+          : "先写三行：改了什么、怎么验证、还有什么边界。";
+      }
+
+      document.querySelector("#check").addEventListener("click", render);
+      document.querySelector("#shorten").addEventListener("click", () => {
+        render();
+        outputEl.textContent = makeShortDraft(source.value);
+      });
+
+      render();
+    </script>
+  </body>
+</html>

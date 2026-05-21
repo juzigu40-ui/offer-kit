@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>去 AI 味文案急救下单单 | 300 元 / 50 美金</title>
+    <meta
+      name="description"
+      content="粘贴原文，生成去 AI 味文案急救的下单材料。只做本地整理，不发送、不注册账号、不处理付款。"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html">AI 小单成交包</a>
+      <nav class="nav" aria-label="页面导航">
+        <a href="./no-ai-copy-polish.html">服务页</a>
+        <a href="#brief">材料</a>
+        <a href="#pay">付款</a>
+        <a href="../tools/no-ai-checker/">自检器</a>
+        <a href="../seeds/">撒种</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero hero--compact">
+        <div class="hero__content">
+          <p class="eyebrow">下单前先把材料凑齐</p>
+          <h1>生成一份能直接发的文案修改需求</h1>
+          <p class="lead">
+            粘贴原文，选发布位置和读者。页面只在本机整理下单信息，不会提交到服务器。
+          </p>
+        </div>
+        <aside class="price-panel" aria-label="价格信息">
+          <span class="price-panel__label">轻服务</span>
+          <strong>¥300 / $50</strong>
+          <p>3 段以内，每段 1000 中文字或 700 英文词以内。确认范围后再付款。</p>
+        </aside>
+      </section>
+
+      <section class="section intake-layout" id="brief">
+        <form class="intake-panel" id="intakeForm">
+          <div class="form-row">
+            <label for="sourceText">原文</label>
+            <textarea
+              id="sourceText"
+              rows="11"
+              placeholder="粘贴 PR 描述、漏洞报告摘要、商品页、私信或邮件初稿。"
+            ></textarea>
+            <p class="field-note" id="lengthNote">0 中文字 / 0 英文词</p>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              发布位置
+              <select id="placement">
+                <option>GitHub PR / issue</option>
+                <option>漏洞报告</option>
+                <option>商品页</option>
+                <option>冷启动私信</option>
+                <option>邮件</option>
+                <option>社媒正文</option>
+              </select>
+            </label>
+            <label>
+              目标读者
+              <select id="reader">
+                <option>开源维护者</option>
+                <option>潜在客户</option>
+                <option>平台审核</option>
+                <option>招聘方</option>
+                <option>社群读者</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label for="facts">不能改动的事实</label>
+            <textarea
+              id="facts"
+              rows="4"
+              placeholder="例如：测试结果、价格、交付时间、已知失败、不能夸大的限制。"
+            ></textarea>
+          </div>
+
+          <fieldset class="checkboxes">
+            <legend>交付需要</legend>
+            <label><input type="checkbox" value="标注问题" checked /> 标注问题</label>
+            <label><input type="checkbox" value="改后版本" checked /> 改后版本</label>
+            <label><input type="checkbox" value="短发布版" checked /> 短发布版</label>
+            <label><input type="checkbox" value="禁用词清单" checked /> 禁用词清单</label>
+          </fieldset>
+
+          <button class="button button--primary" type="button" id="copyBrief">复制下单材料</button>
+        </form>
+
+        <aside class="result-panel" aria-live="polite">
+          <p class="eyebrow">本地判断</p>
+          <h2 id="scopeTitle">可以整理材料</h2>
+          <p id="scopeText">
+            先粘贴原文。页面会按字数和交付边界判断是否适合 300 元 / 50 美金这一档。
+          </p>
+          <div class="brief-box" id="briefOutput"></div>
+          <p class="field-note" id="copyState">复制后可发给服务提供方确认范围。</p>
+        </aside>
+      </section>
+
+      <section class="section section--split" id="pay">
+        <div>
+          <p class="eyebrow">付款边界</p>
+          <h2>确认可做后再付款</h2>
+          <p class="section__copy">
+            这页只帮买家把需求说清楚，不处理真实付款、不提交订单、不登录任何平台。
+          </p>
+          <div class="wallet">
+            <span>付款备注</span>
+            <p>建议写 <strong>AI COPY</strong>，并保留已确认的下单材料。</p>
+            <span>不包含</span>
+            <p>成交承诺、平台通过承诺、账号代运营、群发私信、虚假经历或虚假测试结果。</p>
+          </div>
+          <div class="hero__actions">
+            <a class="button button--primary" href="../assets/wechat-pay.jpg">查看微信收款码</a>
+            <a class="button button--secondary" href="./no-ai-copy-polish.html">返回服务页</a>
+          </div>
+        </div>
+        <figure class="qr">
+          <img src="../assets/wechat-pay.jpg" alt="微信支付收款二维码" />
+          <figcaption>确认范围后再付款。备注建议写 AI COPY。</figcaption>
+        </figure>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>下单单只在浏览器本地运行，不发送内容，不保存内容。</p>
+    </footer>
+
+    <script>
+      const sourceText = document.querySelector("#sourceText");
+      const placement = document.querySelector("#placement");
+      const reader = document.querySelector("#reader");
+      const facts = document.querySelector("#facts");
+      const lengthNote = document.querySelector("#lengthNote");
+      const scopeTitle = document.querySelector("#scopeTitle");
+      const scopeText = document.querySelector("#scopeText");
+      const briefOutput = document.querySelector("#briefOutput");
+      const copyBrief = document.querySelector("#copyBrief");
+      const copyState = document.querySelector("#copyState");
+
+      function countChinese(text) {
+        return (text.match(/[\u4e00-\u9fff]/g) || []).length;
+      }
+
+      function countEnglishWords(text) {
+        return (text.match(/[A-Za-z]+(?:['-][A-Za-z]+)?/g) || []).length;
+      }
+
+      function selectedNeeds() {
+        return Array.from(document.querySelectorAll(".checkboxes input:checked")).map(
+          (item) => item.value,
+        );
+      }
+
+      function buildBrief() {
+        const text = sourceText.value.trim();
+        const cnCount = countChinese(text);
+        const enCount = countEnglishWords(text);
+        const overLimit = cnCount > 1000 || enCount > 700;
+        const empty = text.length === 0;
+        const needs = selectedNeeds();
+
+        lengthNote.textContent = `${cnCount} 中文字 / ${enCount} 英文词`;
+
+        if (empty) {
+          scopeTitle.textContent = "可以整理材料";
+          scopeText.textContent = "先粘贴原文。页面会按字数和交付边界判断是否适合 300 元 / 50 美金这一档。";
+        } else if (overLimit) {
+          scopeTitle.textContent = "超出单次范围";
+          scopeText.textContent = "这段内容超过 1000 中文字或 700 英文词。可以拆成多段，或按第二单确认。";
+        } else {
+          scopeTitle.textContent = "适合 300 元 / 50 美金档";
+          scopeText.textContent = "字数在单次范围内。复制下方材料，确认可做后再付款。";
+        }
+
+        const brief = [
+          "去 AI 味文案急救下单材料",
+          "",
+          `发布位置：${placement.value}`,
+          `目标读者：${reader.value}`,
+          `字数：${cnCount} 中文字 / ${enCount} 英文词`,
+          `交付需要：${needs.join("、") || "未选择"}`,
+          `范围判断：${empty ? "未粘贴原文" : overLimit ? "超出单次范围，需拆分或另确认" : "适合单次范围"}`,
+          "",
+          "不能改动的事实：",
+          facts.value.trim() || "未填写",
+          "",
+          "原文：",
+          text || "未粘贴",
+          "",
+          "边界确认：不编造经历、收益、客户、漏洞影响、测试结果或平台背书；不代发群发。",
+        ].join("\n");
+
+        briefOutput.textContent = brief;
+        return brief;
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+
+        const field = document.createElement("textarea");
+        field.value = text;
+        field.setAttribute("readonly", "");
+        field.style.position = "fixed";
+        field.style.top = "-1000px";
+        document.body.appendChild(field);
+        field.select();
+        const copied = document.execCommand("copy");
+        document.body.removeChild(field);
+        return copied;
+      }
+
+      [sourceText, placement, reader, facts, ...document.querySelectorAll(".checkboxes input")].forEach(
+        (item) => item.addEventListener("input", buildBrief),
+      );
+
+      copyBrief.addEventListener("click", async () => {
+        const brief = buildBrief();
+        const copied = await copyText(brief);
+        copyState.textContent = copied ? "已复制下单材料。" : "复制失败，请手动选中下方内容。";
+        setTimeout(() => {
+          copyState.textContent = "复制后可发给服务提供方确认范围。";
+        }, 1800);
+      });
+
+      buildBrief();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>漏洞报告合规急救 | 300 元 / 50 美金</title>
+    <meta
+      name="description"
+      content="把授权范围内的漏洞报告草稿整理成克制、清楚、可复查的提交版本。不做未授权测试，不写破坏性利用步骤。"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html">AI 小单成交包</a>
+      <nav class="nav" aria-label="页面导航">
+        <a href="#offer">服务</a>
+        <a href="#scope">边界</a>
+        <a href="#order">下单</a>
+        <a href="../tools/vuln-report-builder/">报告工具</a>
+        <a href="../seeds/">撒种</a>
+      </nav>
+    </header>
+
+    <main id="offer">
+      <section class="hero">
+        <div class="hero__content">
+          <p class="eyebrow">只处理授权范围内的报告草稿</p>
+          <h1>把漏洞报告写清楚，不把风险写过头</h1>
+          <p class="lead">
+            适合漏洞平台草稿、开源安全修复说明、维护者私下披露和安全 PR。只改结构、表达、边界和证据呈现，不做未授权测试。
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#order">看下单方式</a>
+            <a class="button button--secondary" href="../tools/vuln-report-builder/">先生成报告草稿</a>
+          </div>
+        </div>
+        <aside class="price-panel" aria-label="价格信息">
+          <span class="price-panel__label">安全报告轻服务</span>
+          <strong>¥300 / $50</strong>
+          <p>1 份报告草稿，24 小时内返回。确认授权范围后再付款。</p>
+        </aside>
+      </section>
+
+      <section class="section section--grid">
+        <div class="section__intro">
+          <p class="eyebrow">交付内容</p>
+          <h2>报告要能复查，不能靠吓人词</h2>
+        </div>
+        <div class="feature-grid">
+          <article class="feature">
+            <h3>标题和摘要</h3>
+            <p>写清漏洞类型、受影响位置和触发条件，不把可能影响写成确定灾难。</p>
+          </article>
+          <article class="feature">
+            <h3>复现结构</h3>
+            <p>把步骤拆成授权范围内、低风险、可本地复查的版本。</p>
+          </article>
+          <article class="feature">
+            <h3>影响说明</h3>
+            <p>保留条件词：may、could、if，不把没有验证的影响写死。</p>
+          </article>
+          <article class="feature">
+            <h3>证据整理</h3>
+            <p>整理测试、截图、日志和代码位置；没有验证的地方明确写未验证。</p>
+          </article>
+          <article class="feature">
+            <h3>修复建议</h3>
+            <p>把修复建议写成可执行检查项，适合维护者直接评估。</p>
+          </article>
+          <article class="feature">
+            <h3>边界声明</h3>
+            <p>补上未测试生产系统、未访问数据、未使用 secret、未做破坏性验证。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--split" id="scope">
+        <div>
+          <p class="eyebrow">合规边界</p>
+          <h2>这不是代测服务</h2>
+          <p class="section__copy">
+            只整理你已经在授权范围内得到的材料。没有授权范围、需要攻击真实生产系统、需要处理真实 secret 的单子不接。
+          </p>
+          <div class="wallet">
+            <span>可以做</span>
+            <p>报告结构、标题摘要、影响降噪、证据顺序、修复建议、边界声明。</p>
+            <span>不做</span>
+            <p>未授权测试、破坏性利用、账号登录、真实 secret 处理、生产系统扫描。</p>
+          </div>
+        </div>
+        <div class="price-panel">
+          <span class="price-panel__label">需要材料</span>
+          <p>授权范围或规则链接、草稿、低风险复现、受影响位置、测试结果、未做事项。</p>
+        </div>
+      </section>
+
+      <section class="section section--split" id="order">
+        <div>
+          <p class="eyebrow">下单</p>
+          <h2>先确认范围，再付款</h2>
+          <p class="section__copy">
+            付款前先发授权范围和草稿。我只确认能否整理表达，不评估 bounty 金额，不承诺平台接受。
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="../assets/wechat-pay.jpg">查看微信收款码</a>
+            <a class="button button--secondary" href="./security-report-polish.md">查看 Markdown 版</a>
+            <a class="button button--secondary" href="../tools/vuln-report-builder/">打开报告工具</a>
+          </div>
+        </div>
+        <figure class="qr">
+          <img src="../assets/wechat-pay.jpg" alt="微信支付收款二维码" />
+          <figcaption>确认可做后再付款。备注建议写 SECURITY COPY。</figcaption>
+        </figure>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>不包含收益承诺、平台通过承诺、漏洞评级承诺或真实支付代处理。</p>
+    </footer>
+  </body>
+</html>
