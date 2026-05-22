@@ -1,6 +1,6 @@
 # 公开反馈记录
 
-更新时间：2026-05-22 14:50 CST
+更新时间：2026-05-22 15:30 CST
 
 用途：记录主动发出的公开触点。只记录明确求反馈、相关 issue 或自己 PR 下的回复；不记录群发、私信或硬广。
 
@@ -32,6 +32,7 @@
 | 2026-05-22 13:29 CST | StoveCode/coraza-dashboard #35 | 回复 env template 核对结果 | issue 说缺 `CORAZA_METRICS_URL`，但当前 master 已有 `.env.example` 示例和 compose 传参；不做重复 PR | https://github.com/StoveCode/coraza-dashboard/issues/35#issuecomment-4515301093 | 等作者确认是否另有缺失文件 |
 | 2026-05-22 14:19 CST | Farukhsb/edu-intel-spark #104 | 回复 lecturer workflow realism 反馈 | issue 明确请求 lecturer workflow 真实感反馈；已读 README、governance note、pipeline 和 moderation demo | https://github.com/Farukhsb/edu-intel-spark/issues/104#issuecomment-4515711837 | 监控作者回复；如要求 PR 再补 |
 | 2026-05-22 14:50 CST | BoolerLogic/marmota #3 | 回复 README / scope clarity 反馈 | issue 明确请求 README 和项目范围反馈；已读 README、build note、Wails 配置和项目结构 | https://github.com/BoolerLogic/marmota/issues/3#issuecomment-4515971903 | 监控作者回复；如要求 PR 再补 |
+| 2026-05-22 15:26 CST | tobi-20/tweet-audit PR #1 | 回复 Go pipeline 架构 / 测试反馈 | PR 明确请求架构和红旗反馈；本地跑 `go test ./...` 复现 checkpoint、输入校验和 prompt 校验问题 | https://github.com/tobi-20/tweet-audit/pull/1#issuecomment-4516400385 | 监控作者回复；如要求 PR 再补 |
 
 ## 发送规则
 
