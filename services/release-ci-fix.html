@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Release / CI 小修 | 300 元 / 50 美金</title>
+    <meta
+      name="description"
+      content="给开源项目和小产品处理一个可验证的 release、CI、打包或 README 发布流程小问题。先确认范围，再付款。"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html">AI 小单成交包</a>
+      <nav class="nav" aria-label="页面导航">
+        <a href="#offer">服务</a>
+        <a href="#proof">样例</a>
+        <a href="#scope">边界</a>
+        <a href="#order">下单</a>
+        <a href="../proof/">交付页</a>
+      </nav>
+    </header>
+
+    <main id="offer">
+      <section class="hero">
+        <div class="hero__content">
+          <p class="eyebrow">适合开源维护者和小产品</p>
+          <h1>修一个 release / CI / 打包流程里的小卡点</h1>
+          <p class="lead">
+            只接能明确复现、能写验证结果的小问题。比如 release 脚本绕过正式 build、macOS/Linux 命令不兼容、README 发布步骤和实际脚本不一致。
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#order">看下单材料</a>
+            <a class="button button--secondary" href="../proof/">看公开 PR</a>
+          </div>
+        </div>
+        <aside class="price-panel" aria-label="价格信息">
+          <span class="price-panel__label">单点小修</span>
+          <strong>¥300 / $50</strong>
+          <p>1 个明确问题，24 小时内给 PR 或补丁说明。先确认范围再付款。</p>
+        </aside>
+      </section>
+
+      <section class="section section--grid">
+        <div class="section__intro">
+          <p class="eyebrow">可以处理</p>
+          <h2>小、清楚、能验证</h2>
+        </div>
+        <div class="feature-grid">
+          <article class="feature">
+            <h3>Release 脚本</h3>
+            <p>修 dry-run、版本替换、zip 路径、上传前检查、跨平台 shell 差异。</p>
+          </article>
+          <article class="feature">
+            <h3>CI 配置</h3>
+            <p>补缺失 env example、修 lint / test 命令、让失败原因更容易定位。</p>
+          </article>
+          <article class="feature">
+            <h3>打包内容</h3>
+            <p>核对 distignore、manifest、zip 内容、是否误带开发文件或漏掉运行文件。</p>
+          </article>
+          <article class="feature">
+            <h3>README 发布步骤</h3>
+            <p>把文档里的发布流程改到和脚本一致，去掉旧命名和误导性步骤。</p>
+          </article>
+          <article class="feature">
+            <h3>验证记录</h3>
+            <p>给 PR 写清楚跑过什么命令、看过什么输出、还有哪些没验证。</p>
+          </article>
+          <article class="feature">
+            <h3>维护者回复</h3>
+            <p>帮你把 review 反馈整理成下一次 commit 的具体动作。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--split" id="proof">
+        <div>
+          <p class="eyebrow">公开样例</p>
+          <h2>不是泛泛讲建议，要有命令和结果</h2>
+          <p class="section__copy">
+            最近的样例是 MCPWP 的 Freemius release PR：把 release 脚本改为复用正式 build script，dry-run 后检查 zip 里是否注入 build flag、是否包含 Freemius bootstrap、是否排除旧 updater。
+          </p>
+          <div class="hero__actions">
+            <a class="button button--secondary" href="https://github.com/Mumega-com/mcpwp/pull/326">查看 MCPWP PR</a>
+            <a class="button button--secondary" href="https://github.com/fetchai/innovation-lab-examples/pull/122">查看 env 示例 PR</a>
+            <a class="button button--secondary" href="https://github.com/Scottcjn/Rustchain/pull/6064">查看 CLI 小修 PR</a>
+          </div>
+        </div>
+        <div class="wallet">
+          <span>返回内容</span>
+          <p>PR 或补丁、验证命令、剩余风险、给维护者看的简短说明。</p>
+          <span>不承诺</span>
+          <p>合并、赏金、平台通过、维护者采纳或生产发布。</p>
+        </div>
+      </section>
+
+      <section class="section section--split" id="scope">
+        <div>
+          <p class="eyebrow">边界</p>
+          <h2>不碰账号和真实发布权限</h2>
+          <p class="section__copy">
+            我可以修公开仓库里的脚本、文档和测试，但不使用你的 release token，不登录你的平台，不替你发布真实版本。
+          </p>
+          <div class="wallet">
+            <span>可以做</span>
+            <p>公开仓库 PR、patch、dry-run、zip manifest 检查、README release 步骤整理。</p>
+            <span>不做</span>
+            <p>真实发布、KYC、token 操作、私有仓库未授权访问、生产系统变更。</p>
+          </div>
+        </div>
+        <div class="price-panel">
+          <span class="price-panel__label">需要材料</span>
+          <p>仓库链接、问题链接、期望结果、能接受的改动范围、必须保留的发布规则。</p>
+        </div>
+      </section>
+
+      <section class="section section--split" id="order">
+        <div>
+          <p class="eyebrow">下单</p>
+          <h2>先发 issue 或仓库链接</h2>
+          <p class="section__copy">
+            我先判断是不是一个 24 小时内能收口的小修。范围不清、需要账号权限、需要真实发布的单子不接。
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="../assets/wechat-pay.jpg">查看微信收款码</a>
+            <a class="button button--secondary" href="./intake.html">生成下单材料</a>
+            <a class="button button--secondary" href="./scope-confirmation.html">生成范围确认</a>
+          </div>
+        </div>
+        <figure class="qr">
+          <img src="../assets/wechat-pay.jpg" alt="微信支付收款二维码" />
+          <figcaption>确认可做后再付款。备注建议写 RELEASE FIX。</figcaption>
+        </figure>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>不包含收益承诺、PR 合并承诺、平台通过承诺或真实支付代处理。</p>
+    </footer>
+  </body>
+</html>
