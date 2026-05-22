@@ -1,6 +1,6 @@
 # 公开反馈记录
 
-更新时间：2026-05-22 17:47 CST
+更新时间：2026-05-22 18:21 CST
 
 用途：记录主动发出的公开触点。只记录明确求反馈、相关 issue 或自己 PR 下的回复；不记录群发、私信或硬广。
 
@@ -38,6 +38,7 @@
 | 2026-05-22 16:48 CST | QuantaVoxel/laravel-bootstrap-component #2 | 回复 Laravel 包架构 / DX 反馈 | issue 明确请求 code review；已读 README、composer、ServiceProvider、helper、docs 和代表性组件 | https://github.com/QuantaVoxel/laravel-bootstrap-component/issues/2#issuecomment-4517132127 | 监控作者回复；如要求 PR 再补 |
 | 2026-05-22 17:19 CST | omry/agent-skill-installer #1 | 回复多技能包 API / manifest 设计反馈 | issue 明确询问一个 Python 包是否应支持多个 agent skill；已读 packaging docs、SkillProject 和 installer manifest 代码 | https://github.com/omry/agent-skill-installer/issues/1#issuecomment-4517355688 | 监控作者回复；如要求 PR 再补 |
 | 2026-05-22 17:47 CST | p1910081/deadport #1 | 回复 beta CLI smoke test 反馈 | issue 明确请求 beta 测试；用 npx 验证空端口、占用端口和版本输出，发现 beta.2 包仍打印 beta.1 | https://github.com/p1910081/deadport/issues/1#issuecomment-4517595535 | 监控作者回复；如需要再补复现 |
+| 2026-05-22 18:21 CST | Mumega-com/mcpwp #320 | 提交 Freemius release 包装 PR | issue 指出 paid single-plugin distribution 与旧 free/premium 包装不一致；PR 复用 Freemius build script 并验证 dry-run zip | https://github.com/Mumega-com/mcpwp/pull/326 | 监控 review / checks |
 
 ## 发送规则
 
