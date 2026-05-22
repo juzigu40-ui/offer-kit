@@ -1,6 +1,6 @@
 # 公开反馈记录
 
-更新时间：2026-05-22 18:46 CST
+更新时间：2026-05-22 19:53 CST
 
 用途：记录主动发出的公开触点。只记录明确求反馈、相关 issue 或自己 PR 下的回复；不记录群发、私信或硬广。
 
@@ -40,6 +40,7 @@
 | 2026-05-22 17:47 CST | p1910081/deadport #1 | 回复 beta CLI smoke test 反馈 | issue 明确请求 beta 测试；用 npx 验证空端口、占用端口和版本输出，发现 beta.2 包仍打印 beta.1 | https://github.com/p1910081/deadport/issues/1#issuecomment-4517595535 | 监控作者回复；如需要再补复现 |
 | 2026-05-22 18:21 CST | Mumega-com/mcpwp #320 | 提交 Freemius release 包装 PR | issue 指出 paid single-plugin distribution 与旧 free/premium 包装不一致；PR 复用 Freemius build script 并验证 dry-run zip | https://github.com/Mumega-com/mcpwp/pull/326 | 监控 review / checks |
 | 2026-05-22 18:46 CST | Bortlesboat/x402-insights #21 | 回复 agent evidence trail / Splunk 审计反馈 | issue 明确请求企业 agent 工具、审批、付款和生产数据证据链反馈；已读 architecture、SDK、Splunk searches 和 proof graph | https://github.com/Bortlesboat/x402-insights/issues/21#issuecomment-4517985535 | 监控作者回复；如要求 PR 再补 |
+| 2026-05-22 19:53 CST | Ubuntu-123/changeloggenie-prototype #2 | 回复 v0.1.0 CLI / AI runner 测试反馈 | issue 明确请求本地测试反馈，0 评论；临时 venv 跑技术 changelog、version 参数、JSON 样例校验和无 key AI runner 边界 | https://github.com/Ubuntu-123/changeloggenie-prototype/issues/2#issuecomment-4518404210 | 监控作者回复；如要求 PR 再补 |
 
 ## 发送规则
 
