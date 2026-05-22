@@ -1,6 +1,6 @@
 # 公开反馈记录
 
-更新时间：2026-05-22 20:20 CST
+更新时间：2026-05-22 20:51 CST
 
 用途：记录主动发出的公开触点。只记录明确求反馈、相关 issue 或自己 PR 下的回复；不记录群发、私信或硬广。
 
@@ -42,6 +42,7 @@
 | 2026-05-22 18:46 CST | Bortlesboat/x402-insights #21 | 回复 agent evidence trail / Splunk 审计反馈 | issue 明确请求企业 agent 工具、审批、付款和生产数据证据链反馈；已读 architecture、SDK、Splunk searches 和 proof graph | https://github.com/Bortlesboat/x402-insights/issues/21#issuecomment-4517985535 | 监控作者回复；如要求 PR 再补 |
 | 2026-05-22 19:53 CST | Ubuntu-123/changeloggenie-prototype #2 | 回复 v0.1.0 CLI / AI runner 测试反馈 | issue 明确请求本地测试反馈，0 评论；临时 venv 跑技术 changelog、version 参数、JSON 样例校验和无 key AI runner 边界 | https://github.com/Ubuntu-123/changeloggenie-prototype/issues/2#issuecomment-4518404210 | 监控作者回复；如要求 PR 再补 |
 | 2026-05-22 20:20 CST | inxbit/prismtty #13 | 提交 Fortinet replay fixture PR | issue 明确请求合成 FortiGate CLI 样例；PR 补 policy、IPsec、diagnose、HA、traffic / UTM log 输出和 replay expectations | https://github.com/inxbit/prismtty/pull/24 | 监控 review / checks |
+| 2026-05-22 20:51 CST | omry/agent-skill-installer #1 | 回复多技能安装实测反馈 | 作者点名邀请测试；用临时 repo 验证多 source skill 选择、安装、rename、manifest、uninstall，并指出 verbose 文档位置和空 hook/目录清理边界 | https://github.com/omry/agent-skill-installer/issues/1#issuecomment-4518787575 | 监控作者是否要求 PR |
 
 ## 发送规则
 
