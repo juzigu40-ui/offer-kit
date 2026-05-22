@@ -1,6 +1,6 @@
 # 公开反馈记录
 
-更新时间：2026-05-22 22:24 CST
+更新时间：2026-05-22 23:08 CST
 
 用途：记录主动发出的公开触点。只记录明确求反馈、相关 issue 或自己 PR 下的回复；不记录群发、私信或硬广。
 
@@ -47,6 +47,7 @@
 | 2026-05-22 21:23 CST | agentic-swmm-workflow #2 | 回复 README 改版后 follow-up | 作者已按上次反馈前移项目边界；复读新版 README 后补两个小调整：自然语言表述位置和 five-minute 标题 | https://github.com/Zhonghao1995/agentic-swmm-workflow/issues/2#issuecomment-4519054026 | 不继续催促，等作者回复 |
 | 2026-05-22 21:51 CST | omry/agent-skill-installer #1 | 回复交互修复验证结果 | 作者用 commit `6e788b6` 修掉交互空选择问题；已拉最新代码复测 TUI，并跑 `test_installer.py` 109 passed | https://github.com/omry/agent-skill-installer/issues/1#issuecomment-4519290366 | 该线索暂收口，等新请求 |
 | 2026-05-22 22:24 CST | tomasz-tomczyk/crit #557 | 回复 live mode 实测反馈 | issue 明确请求 live mode feedback；读当前 main、README、live/preview 注入代码，并跑 Go / Node focused tests | https://github.com/tomasz-tomczyk/crit/issues/557#issuecomment-4519548086 | 监控作者回复；如要求可拆成专门 issue 或 PR |
+| 2026-05-22 23:08 CST | MelorTang/scopeguard #1 | 回复 developer preview first-run 反馈 | issue 明确请求 ScopeGuard public preview 反馈；fresh clone 跑 install、build、typecheck、doctor/smoke 和外部 repo init/scan 流程 | https://github.com/MelorTang/scopeguard/issues/1#issuecomment-4519744209 | 监控作者回复；如要求可拆 docs PR |
 
 ## 发送规则
 
