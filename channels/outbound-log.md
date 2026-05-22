@@ -1,6 +1,6 @@
 # 公开反馈记录
 
-更新时间：2026-05-22 10:47 CST
+更新时间：2026-05-22 11:17 CST
 
 用途：记录主动发出的公开触点。只记录明确求反馈、相关 issue 或自己 PR 下的回复；不记录群发、私信或硬广。
 
@@ -24,6 +24,7 @@
 | 2026-05-22 02:08 CST | BasedHardware/Omi PR #7448 | 回复 Codex review 处理结果 | 自动评论指出 async endpoint 里同步 requests 会阻塞 event loop；已改为 Starlette threadpool 包装 | https://github.com/BasedHardware/omi/pull/7448#issuecomment-4511164704 | 等维护者 review |
 | 2026-05-22 10:26 CST | cargo-fresh #3 | 回复 1.0 前 CLI / JSON schema 反馈 | issue 明确收集反馈，0 评论；建议机器可读 skip reason、registry error、summary counts、prerelease policy | https://github.com/jenkinpan/cargo-fresh/issues/3#issuecomment-4514443100 | 监控作者回复；如要求 PR 再补 |
 | 2026-05-22 10:47 CST | lean-ctx #249 | 回复 Context Manager dashboard UX 反馈 | issue 明确请求 dashboard 反馈，0 评论；建议 pressure table、eviction candidates、budget bands、compression-risk warning | https://github.com/yvgude/lean-ctx/issues/249#issuecomment-4514545793 | 监控作者回复；如要求 PR 再补 |
+| 2026-05-22 11:17 CST | anchormap #5 | 回复 docs-to-code drift demo PR first reaction | issue 明确请求 5 分钟反馈，0 评论；基于 demo PR #3/#2/#4 给出 report clarity、reviewer action、rollout 建议 | https://github.com/fstepho/anchormap/issues/5#issuecomment-4514689721 | 监控作者回复；如要求 PR 再补 |
 
 ## 发送规则
 
