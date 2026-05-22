@@ -1,6 +1,6 @@
 # 公开反馈记录
 
-更新时间：2026-05-22 13:22 CST
+更新时间：2026-05-22 13:29 CST
 
 用途：记录主动发出的公开触点。只记录明确求反馈、相关 issue 或自己 PR 下的回复；不记录群发、私信或硬广。
 
@@ -29,6 +29,7 @@
 | 2026-05-22 12:26 CST | handsdiff/hub #11 | 提交 ghost counterparty deadline PR 后回链 | issue 明确有 100 HUB bounty；PR 实现 14 天默认 deadline、旧记录 backfill 和 48h claimant self-resolve | https://github.com/handsdiff/hub/issues/11#issuecomment-4514951145 | 监控 PR #22 review；不重复催促 |
 | 2026-05-22 12:57 CST | fetchai/innovation-lab-examples #48 | 提交 first-run env examples PR | issue 明确列出缺 `.env.example` 的示例目录；PR 补模板、删除 tracked `.env`、移除硬编码 Serper key | https://github.com/fetchai/innovation-lab-examples/pull/122 | 监控 review / checks |
 | 2026-05-22 13:22 CST | FhenixProtocol/cofhe-hardhat-starter #12 | 提交 missing `.env.example` PR | issue 0 评论且无同题 PR；README 已引用 `.env.example`，仓库缺模板且 `.gitignore` 未保留例外 | https://github.com/FhenixProtocol/cofhe-hardhat-starter/pull/13 | 监控 review；不重复催促 |
+| 2026-05-22 13:29 CST | StoveCode/coraza-dashboard #35 | 回复 env template 核对结果 | issue 说缺 `CORAZA_METRICS_URL`，但当前 master 已有 `.env.example` 示例和 compose 传参；不做重复 PR | https://github.com/StoveCode/coraza-dashboard/issues/35#issuecomment-4515301093 | 等作者确认是否另有缺失文件 |
 
 ## 发送规则
 
